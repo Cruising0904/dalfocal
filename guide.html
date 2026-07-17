@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dalfocal 사용법</title>
+<meta name="description" content="Dalfocal 사용 설명서 — 시작하기, 보드, 카드, 노트 패널, 빠른 캡처, 명령 팔레트, 템플릿, 백업, 단축키 전체 목록.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌘</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">Dalfocal<span>.</span></a>
+    <nav>
+      <a href="index.html">← 홈</a>
+      <a href="index.html#beta">베타 참여</a>
+      <button class="theme-btn" id="theme" type="button" aria-label="테마 전환">theme</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-block: clamp(2.5rem, 6vw, 4rem)">
+<div class="guide-layout">
+
+  <aside class="toc">
+    <p>목차</p>
+    <ul>
+      <li><a href="#start">시작하기</a></li>
+      <li><a href="#screen">화면 구조</a></li>
+      <li><a href="#project">프로젝트와 보드</a></li>
+      <li><a href="#board">보드</a></li>
+      <li><a href="#card">카드 상세</a></li>
+      <li><a href="#hub">노트·할일·메모</a></li>
+      <li><a href="#globalnote">전역 노트</a></li>
+      <li><a href="#capture">빠른 캡처</a></li>
+      <li><a href="#palette">명령 팔레트</a></li>
+      <li><a href="#link">카드 링크</a></li>
+      <li><a href="#templates">템플릿</a></li>
+      <li><a href="#authoring">직접 만들기 · 준비 중</a></li>
+      <li><a href="#backup">백업</a></li>
+      <li><a href="#multi">여러 프로젝트·멀티 인스턴스</a></li>
+      <li><a href="#sync">동기화</a></li>
+      <li><a href="#ai">AI로 작업하기</a></li>
+      <li><a href="#settings">설정</a></li>
+      <li><a href="#keys">단축키 전체</a></li>
+      <li><a href="#gestures">제스처</a></li>
+      <li><a href="#hangul">한글 입력</a></li>
+    </ul>
+  </aside>
+
+  <article class="guide">
+    <h1>사용법</h1>
+    <p class="intro">기능이 무엇이고 어떻게 도달하는지를 설명합니다. 단축키만 빠르게 찾으려면
+      <a href="#keys">단축키 전체</a>로 바로 가세요.</p>
+
+    <section id="start">
+      <h2>시작하기</h2>
+      <p><strong>설치.</strong> Windows는 zip을 풀고 <code>dalfocal.exe</code>를 실행합니다.
+        Android는 전달받은 APK를 설치합니다. 로그인도, 서버 설정도, 온보딩 마법사도 없습니다.
+        켜면 바로 빈 보드가 나옵니다.</p>
+
+      <div class="callout">
+        <strong>처음 5분.</strong> 빈 보드에서 바로 시작하지 말고 튜토리얼 보드부터 만드세요.
+        <span class="cap">ctrl</span>+<span class="cap">p</span>로 명령 팔레트를 열고 →
+        <strong>"샘플 보드 만들기"</strong>를 실행합니다. 조작법을 카드가 직접 알려줍니다.
+      </div>
+
+      <p>이 네 가지만 익히면 대부분을 할 수 있습니다.</p>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td><span class="cap">h</span> <span class="cap">j</span> <span class="cap">k</span> <span class="cap">l</span></td><td>카드 사이를 움직입니다 (방향키도 됩니다)</td></tr>
+        <tr><td><span class="cap">enter</span></td><td>카드를 엽니다</td></tr>
+        <tr><td><span class="cap">esc</span></td><td>한 겹 닫고 뒤로 나옵니다</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">p</span></td><td>명령 팔레트 — 뭐든 찾고 실행합니다</td></tr>
+      </table>
+      </div>
+      <p>막히면 아무 데서나 <span class="cap">?</span>를 누르세요. 지금 화면에서 쓸 수 있는 키가 나옵니다.</p>
+    </section>
+
+    <section id="screen">
+      <h2>화면 구조</h2>
+      <p>Dalfocal은 화면을 옮겨 다니는 앱이 아닙니다. <strong>보드 하나</strong> 위에 패널과 창이
+        겹쳐지는 구조입니다. 그래서 <span class="cap">esc</span>는 언제나 <strong>한 겹 벗기기</strong>입니다 —
+        편집 중이면 편집을 끝내고, 창이 열려 있으면 닫고, 그다음 원래 자리로 돌아갑니다.</p>
+      <p>지금 어느 영역에 있느냐에 따라 같은 키가 다른 일을 합니다. 영역 사이는
+        <span class="cap">ctrl</span>+<span class="cap">h</span> / <span class="cap">ctrl</span>+<span class="cap">l</span>
+        (또는 <span class="cap">ctrl</span>+←/→)로 오갑니다.</p>
+      <ul class="plain">
+        <li>왼쪽 — 프로젝트·보드 목록 (<span class="cap">b</span>로 여닫기)</li>
+        <li>가운데 — 보드</li>
+        <li>오른쪽 — 노트·할 일·메모 패널 (<span class="cap">.</span>로 여닫기)</li>
+        <li>위 — 전역 노트 (<span class="cap">w</span>)</li>
+        <li>그 위에 겹쳐짐 — 카드 상세, 명령 팔레트, 빠른 캡처, 캡처 인박스</li>
+      </ul>
+    </section>
+
+    <section id="project">
+      <h2>프로젝트와 보드</h2>
+      <ul class="plain">
+        <li><strong>프로젝트</strong>를 만들 때는 <strong>이름만</strong> 입력합니다. 곧바로 보드를 만드는 화면이 이어집니다.</li>
+        <li><strong>보드</strong>를 만들 때 <strong>템플릿</strong>을 고릅니다. 템플릿이 컬럼·라벨·속성 필드·샘플 카드·카드 템플릿을 한꺼번에 만들어 줍니다.</li>
+      </ul>
+      <p>프로젝트가 여럿이면 <span class="cap">ctrl</span>+<span class="cap">1</span>~<span class="cap">9</span>로,
+        보드가 여럿이면 <span class="cap">alt</span>+<span class="cap">1</span>~<span class="cap">9</span>로 건너뜁니다.</p>
+    </section>
+
+    <section id="board">
+      <h2>보드</h2>
+      <h3>보기 모드 네 가지</h3>
+      <p><span class="cap">v</span>를 누를 때마다 바뀝니다 (<span class="cap">shift</span>+<span class="cap">v</span>는 역방향).
+        어느 모드로 바꿔도 <strong>고르고 있던 카드는 그대로 유지</strong>됩니다.</p>
+      <ul class="plain">
+        <li><strong>칸반</strong> — 컬럼과 카드. 기본값.</li>
+        <li><strong>리스트</strong> — 한 줄씩 늘어놓기.</li>
+        <li><strong>캘린더</strong> — 마감일 기준.</li>
+        <li><strong>오늘 일정</strong> — 예정 시각이 있는 카드를 시간순으로.</li>
+      </ul>
+
+      <h3>카드 빠른 추가</h3>
+      <p><span class="cap">c</span>를 누르면 입력창이 열립니다. 제목을 치면서 속성을 같이 넣을 수 있습니다.</p>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><th>기호</th><th>뜻</th><th>예</th></tr>
+        <tr><td><code>!</code></td><td>우선순위</td><td><code>!high</code></td></tr>
+        <tr><td><code>#</code></td><td>라벨</td><td><code>#bug</code></td></tr>
+        <tr><td><code>@</code></td><td>담당자</td><td><code>@ay</code></td></tr>
+        <tr><td><code>~</code></td><td>마감일</td><td><code>~7/12</code></td></tr>
+      </table>
+      </div>
+
+      <h3>카드 다루기</h3>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td><span class="cap">h</span> <span class="cap">j</span> <span class="cap">k</span> <span class="cap">l</span></td><td>카드 고르기</td></tr>
+        <tr><td><span class="cap">shift</span> + hjkl</td><td>고른 카드를 옮깁니다. 컬럼 제목에서는 컬럼이 움직입니다</td></tr>
+        <tr><td><span class="cap">enter</span></td><td>카드 열기</td></tr>
+        <tr><td><span class="cap">x</span> / <span class="cap">space</span></td><td>완료 토글</td></tr>
+        <tr><td><span class="cap">delete</span></td><td>카드 삭제 (<span class="cap">enter</span> 확정 / <span class="cap">esc</span> 취소)</td></tr>
+        <tr><td><span class="cap">alt</span>+<span class="cap">c</span></td><td>카드 링크 복사</td></tr>
+        <tr><td><span class="cap">gg</span> / <span class="cap">G</span></td><td>첫 카드 / 마지막 카드</td></tr>
+        <tr><td><code>3j</code></td><td>숫자를 앞에 붙이면 그만큼 여러 칸 이동</td></tr>
+      </table>
+      </div>
+      <p>마우스나 손가락으로 <strong>끌어다 놓기</strong>도 됩니다.</p>
+    </section>
+
+    <section id="card">
+      <h2>카드 상세</h2>
+      <p>카드에서 <span class="cap">enter</span>. 보드에서 바로 원하는 곳으로 뛰어들 수도 있습니다 —
+        <span class="cap">e</span> 제목, <span class="cap">d</span> 설명, <span class="cap">f</span> 속성, <span class="cap">i</span> 우선순위.</p>
+      <p>안에는 <strong>속성 · 첨부 · 댓글 · 설명</strong> 네 구역이 있고 순서를 바꿀 수 있습니다.
+        <span class="cap">tab</span>으로 구역을 넘기고 <span class="cap">j</span> <span class="cap">k</span>로 구역 안에서 움직입니다.</p>
+      <p>담을 수 있는 것:</p>
+      <ul class="plain">
+        <li><strong>속성 필드</strong> — 프로젝트마다 직접 정의합니다. 텍스트, 선택, 체크박스, 날짜, 숫자, 링크.</li>
+        <li><strong>체크리스트</strong> — 그냥 목록이 아니라 <strong>진짜 할 일</strong>입니다. 여기서 체크하면 프로젝트 할 일 목록에도 반영됩니다.</li>
+        <li><strong>첨부</strong> — <span class="cap">+</span> 버튼으로 파일을 고르거나, 카드 위로 파일을 <strong>끌어다 놓으면</strong> 바로 첨부됩니다.
+          이미지는 바로 미리보기가 됩니다.</li>
+        <li><strong>댓글 · 라벨 · 우선순위 · 마감일</strong></li>
+        <li>루틴 성격의 프로젝트에서는 <strong>예정 시각</strong>과 <strong>소요 시간</strong>이 추가로 나타납니다.</li>
+      </ul>
+      <p>마음에 드는 카드는 <strong>템플릿으로 저장</strong>해 두고 다시 꺼내 쓸 수 있습니다.</p>
+      <div class="callout">
+        <strong>카드를 다른 곳으로 옮기기.</strong> 상세 위쪽의 <code>프로젝트 / 보드</code> 경로를 누르거나
+        <span class="cap">m</span>을 누르면 이동 시트가 열립니다. 여기서 <strong>프로젝트 → 보드 → 컬럼</strong>까지
+        내려가 목적지를 고르면 카드가 그대로 그 자리로 옮겨집니다. 다른 프로젝트의 보드로도 건너뜁니다.
+      </div>
+    </section>
+
+    <section id="hub">
+      <h2>노트 · 할 일 · 메모</h2>
+      <p>오른쪽 패널입니다. <span class="cap">.</span> 또는 <span class="cap">]</span>로 엽니다. 탭이 셋입니다.</p>
+      <p><span class="cap">ctrl</span>+<span class="cap">tab</span>으로 탭을 넘기거나,
+        <span class="cap">n</span>(노트) · <span class="cap">t</span>(할 일) · <span class="cap">m</span>(메모)으로 바로 엽니다.
+        목록 안에서는 <span class="cap">j</span> <span class="cap">k</span>로 움직이고 <span class="cap">enter</span>로 엽니다.</p>
+      <div class="callout">
+        <strong><span class="cap">space</span>는 항목의 종류를 바꿉니다.</strong> 메모를 할 일로, 노트를 카드로 승격하는 식입니다.
+        메모로 적어둔 게 일이 되면 <span class="cap">space</span> 한 번으로 카드가 됩니다. 이게 이 패널의 핵심입니다.
+      </div>
+      <p><strong>노트 편집 방식.</strong> 설정에서 <strong>vim식 진입</strong>을 켜면 <span class="cap">i</span>는 본문,
+        <span class="cap">e</span>는 제목을 엽니다. 꺼져 있으면 둘 다 제목을 엽니다.</p>
+    </section>
+
+    <section id="globalnote">
+      <h2>전역 노트</h2>
+      <p>프로젝트에 매이지 않는 노트입니다. <span class="cap">w</span>로 위쪽 패널을 열고,
+        <span class="cap">shift</span>+<span class="cap">w</span>로 새 초안을 만듭니다. 여러 장 만들 수 있습니다.</p>
+      <p>고정해 두지 않으면, 다른 곳으로 옮겨갈 때 알아서 작은 배지로 접힙니다.</p>
+    </section>
+
+    <section id="capture">
+      <h2>빠른 캡처</h2>
+      <p>떠오른 걸 <strong>일단 붙잡고 나중에 분류하는</strong> 흐름입니다. 지금 어디에 넣을지 고민하지 않는 게 핵심입니다.</p>
+      <ul class="plain">
+        <li><span class="cap">q</span> — 빠른 캡처. 그냥 적고 닫습니다. 인박스에 쌓입니다.</li>
+        <li><span class="cap">shift</span>+<span class="cap">q</span> — 캡처 인박스를 엽니다. 툴바 번개 아이콘에 안 처리한 개수가 표시됩니다.</li>
+        <li>각 항목을 <strong>카드 · 노트 · 할 일 · 메모</strong> 중 하나로 보냅니다.</li>
+      </ul>
+    </section>
+
+    <section id="palette">
+      <h2>명령 팔레트</h2>
+      <p><span class="cap">ctrl</span>+<span class="cap">p</span>. <strong>검색과 실행이 전부 여기 있습니다.</strong></p>
+      <p>찾을 대상(스코프)을 바꿔가며 씁니다. <span class="cap">tab</span>으로 순환하거나 첫 글자로 바로 갑니다:
+        <span class="cap">p</span> 프로젝트 · <span class="cap">b</span> 보드 · <span class="cap">c</span> 카드 ·
+        <span class="cap">l</span> 라벨 · <span class="cap">n</span> 노트 · <span class="cap">t</span> 할 일 ·
+        <span class="cap">m</span> 메모 · <span class="cap">w</span> 전역 노트.</p>
+      <p>검색어 첫 글자로 기호를 치면 더 빠릅니다.</p>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><th>기호</th><th>찾는 것</th></tr>
+        <tr><td><code>&gt;</code></td><td>명령 실행</td></tr>
+        <tr><td><code>@</code></td><td>카드</td></tr>
+        <tr><td><code>#</code></td><td>라벨</td></tr>
+        <tr><td><code>/</code></td><td>노트</td></tr>
+        <tr><td><code>!</code></td><td>우선순위</td></tr>
+      </table>
+      </div>
+      <p><span class="cap">i</span>로 검색어를 입력하고, <span class="cap">j</span> <span class="cap">k</span>로 결과를 고르고,
+        <span class="cap">enter</span>로 실행합니다.</p>
+      <p><code>&gt;</code> 스코프에서 할 수 있는 것: 샘플 보드 만들기, 프로젝트·보드·컬럼 만들기, 빠른 캡처,
+        캡처 인박스, 전역 노트, 카드 링크 복사/열기, 완료 카드 숨기기, 설정 열기.</p>
+    </section>
+
+    <section id="link">
+      <h2>카드 링크</h2>
+      <p>카드마다 고유한 링크가 있습니다. 보드에서 <span class="cap">alt</span>+<span class="cap">c</span>로 복사합니다.</p>
+      <p>이 링크를 다른 곳(메신저, 이메일, 다른 노트)에 붙여두면, 눌렀을 때 Dalfocal이 열리면서 그 카드로 바로 갑니다.
+        클립보드에 링크가 있으면 명령 팔레트의 "카드 링크 열기"로도 열 수 있습니다.</p>
+      <p>Windows에서 링크 클릭이 동작하지 않으면 배포자에게 문의하세요. 한 번만 등록해 주면 됩니다.</p>
+    </section>
+
+    <section id="templates">
+      <h2>템플릿</h2>
+      <p>보드를 만들 때 템플릿을 고릅니다. 기본 제공 템플릿이 20종이 넘고, 기본 / 루틴 / 개발 / 업무 / 기획으로 분류돼 있습니다.</p>
+      <p>템플릿 하나가 <strong>초기 컬럼 · 라벨 팔레트 · 속성 필드 · 샘플 카드 · 카드 템플릿</strong>을 한꺼번에 만들어 줍니다.
+        예를 들어 개발 템플릿을 고르면 이슈 흐름에 맞는 컬럼과 버그 리포트 카드 템플릿이 함께 들어옵니다.</p>
+    </section>
+
+    <section id="authoring">
+      <h2>직접 만들기 — 템플릿 · 테마 · 스킨</h2>
+      <div class="callout">
+        <strong>준비 중인 기능입니다.</strong> 지금은 기본 제공 템플릿과 테마를 고르는 것까지 됩니다.
+        여기서 한 걸음 더 나아가 <strong>내 것을 직접 만들어 저장하고 다시 꺼내 쓰는</strong> 도구를
+        준비하고 있습니다. 아래는 방향을 미리 적어둔 것으로, 도구가 나오면 실제 사용법으로 채웁니다.
+      </div>
+
+      <h3>내 템플릿</h3>
+      <p>자주 쓰는 보드 구성을 <strong>통째로 템플릿으로 저장</strong>해 두고, 새 보드를 만들 때
+        기본 템플릿처럼 골라 쓸 수 있게 할 계획입니다. 컬럼 구성 · 라벨 · 속성 필드 · 카드 템플릿까지
+        내가 짠 그대로. 만든 템플릿은 이름을 바꾸거나 지우는 것도 가능해집니다.</p>
+
+      <h3>내 테마</h3>
+      <p>배경 · 글자 · 강조색 같은 <strong>색을 직접 조합해 나만의 테마</strong>를 만들고 저장하는
+        도구를 준비합니다. 라이트/다크에 각각 맞춰 두면 앱 전체가 그 색으로 바뀝니다.</p>
+
+      <h3>내 스킨</h3>
+      <p>테마가 색이라면 스킨은 <strong>질감과 모양</strong>입니다. 카드 · 컬럼 · 여백 같은 요소의
+        생김새를 손봐 분위기를 바꾸는 쪽으로 방향을 잡고 있습니다.</p>
+
+      <div class="callout">
+        만든 템플릿 · 테마 · 스킨을 <strong>파일 하나로 내보내고 가져오는</strong> 방식으로 서로
+        나눠 쓰는 것까지 이어질 예정입니다. 세부 사용법은 도구가 준비되는 대로 이 자리에 채웁니다.
+      </div>
+    </section>
+
+    <section id="backup">
+      <h2>백업</h2>
+      <ul class="plain">
+        <li><strong>자동 백업</strong> — 앱을 켤 때마다 자동으로 만들어지고 최근 10개가 남습니다. 설정 → 백업에서 원하는 시점으로 되돌립니다.</li>
+        <li><strong>내보내기</strong> — 파일 하나로 저장됩니다. 첨부 파일까지 같이 들어갑니다.</li>
+        <li><strong>가져오기</strong> — 기존 데이터를 지우지 않고 <strong>합칩니다.</strong> 예전에 지웠던 항목이 다시 살아날 수 있으니 유의하세요.</li>
+      </ul>
+      <div class="callout">중요한 데이터를 넣기 전에 <strong>설정 → 백업 → 내보내기</strong>를 한 번 해보시길 권합니다.</div>
+    </section>
+
+    <section id="multi">
+      <h2>여러 프로젝트 · 멀티 인스턴스</h2>
+      <p>Dalfocal은 <strong>인스턴스를 여러 개 띄울 수 있습니다.</strong> 창을 여러 개 열면
+        모두 같은 로컬 데이터를 봅니다. 한 창에서 카드를 옮기거나 노트를 고치면, 다른 창에도
+        곧(수백 밀리초 안에) 반영됩니다. 서버도, 동기화도, 계정도 필요 없습니다.</p>
+
+      <h3>가상 데스크톱마다 프로젝트 하나</h3>
+      <p>여러 프로젝트를 한 번에 굴리는 가장 빠른 방법입니다. 가상 데스크톱마다 Dalfocal 창을
+        하나씩 올려두고, 각 창에서 다른 프로젝트를 엽니다. 데스크톱을 넘나드는 것만으로 프로젝트가
+        전환됩니다.</p>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><th>Windows</th><th>하는 일</th></tr>
+        <tr><td><span class="cap">Win</span>+<span class="cap">Ctrl</span>+<span class="cap">D</span></td><td>새 가상 데스크톱 만들기</td></tr>
+        <tr><td><span class="cap">Win</span>+<span class="cap">Ctrl</span>+<span class="cap">←</span> / <span class="cap">→</span></td><td>데스크톱 사이 이동</td></tr>
+        <tr><td><span class="cap">Win</span>+<span class="cap">Tab</span></td><td>모든 데스크톱 한눈에 보기</td></tr>
+      </table>
+      </div>
+      <p>회사 일, 사이드 프로젝트, 개인 할 일을 각각 다른 데스크톱에 두고 한 손짓에 오가는 식으로
+        쓸 수 있습니다.</p>
+    </section>
+
+    <section id="sync">
+      <h2>동기화</h2>
+      <div class="callout">
+        동기화를 켜면 <strong>여러 기기</strong>가 같은 데이터를 공유합니다. 폰에서 잡은 걸 PC에서
+        정리하는 흐름입니다. <strong>로컬 전용인 이번 베타에서는 아직 꺼져 있습니다</strong> —
+        준비가 끝나면 열립니다. 아래는 열렸을 때의 사용법입니다.
+      </div>
+
+      <h3>연결하기</h3>
+      <ul class="plain">
+        <li>설정 → <strong>동기화 서버</strong>로 갑니다.</li>
+        <li><strong>호스트</strong>와 <strong>포트</strong>를 입력하고 저장합니다.</li>
+        <li>보드 상단의 <strong>동기화 상태 표시</strong>를 누르고 <strong>연결 시도</strong>를 누릅니다.</li>
+      </ul>
+
+      <h3>로컬 퍼스트 원칙</h3>
+      <p>동기화를 켜도 <strong>읽기는 로컬에서, 쓰기도 로컬에 먼저</strong> 반영됩니다. 서버가 없거나
+        연결이 끊겨도 작업은 계속됩니다. 못 보낸 변경은 쌓였다가 다음에 연결될 때 한꺼번에 올라가고,
+        상단 상태 표시에 <strong>대기 중인 개수</strong>가 보입니다.</p>
+      <p>여러 기기가 동시에 밀어도, 인스턴스마다 고유 ID를 달고 있어 충돌 없이 섞입니다.</p>
+    </section>
+
+    <section id="ai">
+      <h2>AI로 작업하기 (MCP)</h2>
+      <div class="callout">
+        Dalfocal은 <strong>MCP</strong>(Model Context Protocol)를 지원합니다. Claude 같은 AI 도구를
+        연결하면 AI가 당신의 데이터에 직접 작업합니다. 이 기능은 동기화 서버 위에서 동작하며,
+        <strong>로컬 전용인 이번 베타에서는 아직 열려 있지 않습니다.</strong> 아래는 열렸을 때의 사용법입니다.
+      </div>
+
+      <h3>AI가 할 수 있는 것</h3>
+      <p>단순히 읽기만 하는 게 아니라, 실제로 만들고 고칩니다. 프로젝트·보드·컬럼·카드·노트를 만들고,
+        읽고, 수정하고, 삭제하고, 카드를 옮깁니다. 테마·할 일 모드 같은 설정, 단축키, 제스처, 보드
+        템플릿까지 다룹니다. 작업 도구가 <strong>30개가 넘습니다.</strong></p>
+
+      <h3>이렇게 씁니다</h3>
+      <ul class="plain">
+        <li>"이번 주 안 끝난 카드를 다음 주 컬럼으로 옮겨줘."</li>
+        <li>"회의록을 붙여줄 테니 항목마다 카드로 만들어줘."</li>
+        <li>"이 프로젝트의 할 일을 우선순위대로 정리해줘."</li>
+      </ul>
+
+      <h3>연결하기</h3>
+      <p>MCP를 지원하는 도구(Claude 데스크탑·CLI, Gemini CLI, Cursor 등)에 Dalfocal MCP 커넥터를
+        등록하면 됩니다. 커넥터는 당신의 Dalfocal 데이터에 연결되어, 위 도구들을 통해 AI가 보드를
+        읽고 씁니다. 자세한 등록 방법은 배포와 함께 안내됩니다.</p>
+    </section>
+
+    <section id="settings">
+      <h2>설정</h2>
+      <p><span class="cap">ctrl</span>+<span class="cap">,</span>로 엽니다.</p>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td>테마</td><td>밝게 / 어둡게</td></tr>
+        <tr><td>보기</td><td>할 일 모드 — 카드 앞에 체크박스를 붙입니다</td></tr>
+        <tr><td>제스처</td><td>어떤 모양이 어떤 동작을 할지 바꿉니다</td></tr>
+        <tr><td>첨부</td><td>큰 파일을 어디에 둘지</td></tr>
+        <tr><td>노트 편집</td><td>vim식 진입 켜기/끄기</td></tr>
+        <tr><td>계정</td><td>Google 연결 (지금은 필요 없습니다)</td></tr>
+        <tr><td>사용자 아이콘</td><td>아이콘 추가/삭제</td></tr>
+        <tr><td>백업</td><td>내보내기 · 가져오기 · 자동 백업 복원</td></tr>
+      </table>
+      </div>
+      <p>따로 열리는 화면: <strong>단축키</strong>(<span class="cap">ctrl</span>+<span class="cap">shift</span>+<span class="cap">,</span>),
+        <strong>동기화 서버</strong>, <strong>Gitea / Git</strong>, <strong>보관된 프로젝트</strong>.</p>
+    </section>
+
+    <section id="keys">
+      <h2>단축키 전체</h2>
+      <div class="callout">
+        모든 키는 <strong>자판의 물리적 위치</strong>로 인식됩니다. 한/영 상태·CapsLock에 영향받지 않습니다.
+        아래 <strong>어디서나</strong> 표의 키만 설정 → 단축키에서 바꿀 수 있고, 나머지는 고정입니다.
+      </div>
+
+      <h3>어디서나 (변경 가능)</h3>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td><span class="cap">q</span></td><td>빠른 캡처</td></tr>
+        <tr><td><span class="cap">shift</span>+<span class="cap">q</span></td><td>캡처 인박스</td></tr>
+        <tr><td><span class="cap">?</span></td><td>단축키 도움말</td></tr>
+        <tr><td><span class="cap">.</span></td><td>노트 패널 여닫기</td></tr>
+        <tr><td><span class="cap">b</span></td><td>보드 목록 여닫기</td></tr>
+        <tr><td><span class="cap">w</span></td><td>전역 노트</td></tr>
+        <tr><td><span class="cap">c</span></td><td>카드 빠른 추가</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">p</span></td><td>명령 팔레트</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">,</span></td><td>설정</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">]</span></td><td>완료된 카드 숨기기</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">shift</span>+<span class="cap">p</span> / <span class="cap">b</span> / <span class="cap">c</span></td><td>새 프로젝트 / 보드 / 컬럼</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">tab</span></td><td>노트 패널 탭 넘기기</td></tr>
+      </table>
+      </div>
+
+      <h3>모든 화면에서 같은 뜻</h3>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td><span class="cap">h</span> ← / <span class="cap">l</span> →</td><td>왼쪽 / 오른쪽</td></tr>
+        <tr><td><span class="cap">k</span> ↑ / <span class="cap">j</span> ↓</td><td>위 / 아래</td></tr>
+        <tr><td><span class="cap">tab</span> / <span class="cap">shift</span>+<span class="cap">tab</span></td><td>다음 / 이전 구역</td></tr>
+        <tr><td><span class="cap">enter</span></td><td>열기 · 확정</td></tr>
+        <tr><td><span class="cap">space</span></td><td>토글 · 보조 동작</td></tr>
+        <tr><td><span class="cap">e</span> / <span class="cap">i</span></td><td>편집</td></tr>
+        <tr><td><span class="cap">delete</span></td><td>삭제</td></tr>
+        <tr><td><span class="cap">esc</span></td><td>편집 끝내기 → 창 닫기 → 뒤로</td></tr>
+      </table>
+      </div>
+
+      <h3>보드에서 더</h3>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td><span class="cap">v</span> / <span class="cap">shift</span>+<span class="cap">v</span></td><td>다음 / 이전 보기 모드</td></tr>
+        <tr><td><span class="cap">z</span></td><td>프로젝트 접기</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">1</span>~<span class="cap">9</span></td><td>프로젝트 전환</td></tr>
+        <tr><td><span class="cap">alt</span>+<span class="cap">1</span>~<span class="cap">9</span></td><td>보드 전환</td></tr>
+        <tr><td><span class="cap">[</span> / <span class="cap">]</span></td><td>보드로 / 노트 패널로</td></tr>
+        <tr><td><span class="cap">n</span> <span class="cap">t</span> <span class="cap">m</span></td><td>노트 / 할 일 / 메모 탭 열기</td></tr>
+      </table>
+      </div>
+
+      <h3>카드 상세에서</h3>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><td><span class="cap">tab</span></td><td>구역 넘기기</td></tr>
+        <tr><td><span class="cap">ctrl</span>+<span class="cap">h</span> / <span class="cap">ctrl</span>+<span class="cap">l</span></td><td>이전 / 다음 구역</td></tr>
+        <tr><td><span class="cap">e</span> / <span class="cap">d</span></td><td>제목 / 설명</td></tr>
+        <tr><td><span class="cap">shift</span>+<span class="cap">d</span></td><td>마감일</td></tr>
+        <tr><td><span class="cap">s</span> / <span class="cap">l</span> / <span class="cap">a</span></td><td>상태 / 라벨 / 담당자</td></tr>
+        <tr><td><span class="cap">i</span> / <span class="cap">t</span></td><td>우선순위 / 체크리스트</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section id="gestures">
+      <h2>제스처</h2>
+      <p><strong>보드 화면에서만</strong> 동작합니다. 데스크탑은 <strong>오른쪽 버튼 드래그</strong>,
+        모바일은 <strong>두 손가락 드래그</strong>로 모양을 그립니다. 설정 → 제스처에서 재매핑할 수 있습니다.</p>
+      <div class="table-scroll">
+      <table class="keys">
+        <tr><th>모양</th><th>하는 일</th></tr>
+        <tr><td>← 왼쪽</td><td>보드 목록 여닫기</td></tr>
+        <tr><td>→ 오른쪽</td><td>노트 패널 여닫기</td></tr>
+        <tr><td>↑ 위</td><td>캡처 인박스</td></tr>
+        <tr><td>↓ 아래</td><td>빠른 캡처</td></tr>
+        <tr><td>ㄴ (아래→오른쪽)</td><td>명령 팔레트</td></tr>
+        <tr><td>ㄱ (오른쪽→아래)</td><td>전역 노트</td></tr>
+      </table>
+      </div>
+      <p>대각선·C·U·Z 같은 모양도 인식하지만 기본값이 비어 있습니다. 설정 → 제스처에서 원하는 동작을 지정하세요.</p>
+      <p>손가락으로: <strong>두 손가락 탭</strong> = 뒤로 가기, <strong>목록 탭</strong> = 열기,
+        <strong>길게 누르기</strong> = 고르기.</p>
+    </section>
+
+    <section id="hangul">
+      <h2>한글 입력</h2>
+      <p>모든 단축키는 <strong>자판의 물리적 위치</strong>로 인식됩니다. 한/영 상태나 CapsLock과 관계없이
+        <span class="cap">h</span> 자리를 누르면 왼쪽으로 갑니다.</p>
+      <p>글자를 입력하는 중에는 단축키가 자동으로 비활성화됩니다. 입력 도중에 단축키가 글자를 가로챈다면
+        그건 버그이니 알려주세요.</p>
+    </section>
+
+    <p style="margin-top:3.5rem"><a class="backlink" href="index.html">← Dalfocal 홈으로</a></p>
+  </article>
+
+</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Dalfocal — 로컬 퍼스트 키보드 칸반</p>
+    <nav>
+      <a href="index.html">홈</a>
+      <a href="index.html#beta">베타 참여</a>
+    </nav>
+    <p>기한이 있는 베타입니다 · 데이터는 언제든 내보낼 수 있습니다</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById("theme");
+  btn.addEventListener("click", function () {
+    var dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var current = root.getAttribute("data-theme") || (dark ? "dark" : "light");
+    root.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+  });
+})();
+</script>
+
+</body>
+</html>
