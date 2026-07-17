@@ -28,6 +28,7 @@
     <p>목차</p>
     <ul>
       <li><a href="#start">시작하기</a></li>
+      <li><a href="#kanban">칸반이 처음이라면</a></li>
       <li><a href="#screen">화면 구조</a></li>
       <li><a href="#project">프로젝트와 보드</a></li>
       <li><a href="#board">보드</a></li>
@@ -52,7 +53,7 @@
 
   <article class="guide">
     <h1>사용법</h1>
-    <p class="intro">기능이 무엇이고 어떻게 도달하는지를 설명합니다. 단축키만 빠르게 찾으려면
+    <p class="intro">각 기능이 무엇이고 어디서 꺼내 쓰는지 설명합니다. 단축키만 빠르게 찾으려면
       <a href="#keys">단축키 전체</a>로 바로 가세요.</p>
 
     <section id="start">
@@ -77,6 +78,39 @@
       </table>
       </div>
       <p>막히면 아무 데서나 <span class="cap">?</span>를 누르세요. 지금 화면에서 쓸 수 있는 키가 나옵니다.</p>
+    </section>
+
+    <section id="kanban">
+      <h2>칸반이 처음이라면</h2>
+      <p>칸반은 할 일을 <strong>카드로 만들어 왼쪽에서 오른쪽으로 밀며</strong> 굴리는 방식입니다.
+        칸(컬럼)이 일의 단계고, 카드 하나가 할 일 하나예요. 보통 <strong>할 일 → 하는 중 → 끝</strong> 세 칸으로
+        시작해서, 일이 진행될 때마다 카드를 오른쪽 칸으로 옮깁니다. 뭐가 밀려 있고 뭐가 끝났는지 한눈에 보입니다.</p>
+
+      <p>하루는 대략 이렇게 흐릅니다.</p>
+      <ul class="plain">
+        <li><strong>붙잡는다</strong> — 떠오른 걸 먼저 적어둡니다. 어디에 둘지는 나중에 정해도 됩니다.</li>
+        <li><strong>카드로 만든다</strong> — 진짜 해야 할 일이면 카드로 올려 보드에 놓습니다.</li>
+        <li><strong>민다</strong> — 시작하면 <em>하는 중</em>으로, 마치면 <em>끝</em>으로 카드를 옮깁니다.</li>
+        <li><strong>완료 표시</strong> — 다 한 카드는 <span class="cap">x</span>(또는 <span class="cap">space</span>)로 끝났다고 체크합니다.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>완료는 지우는 게 아닙니다.</strong> 카드를 삭제하는 게 아니라 “끝났다”고 표시하는 거예요.
+        완료한 카드는 <span class="cap">ctrl</span>+<span class="cap">]</span>로 숨겨 보드를 깔끔하게 둘 수 있고,
+        <strong>할 일 모드</strong>(설정 → 보기)를 켜면 카드 앞에 체크박스가 붙어 체크만으로 완료됩니다.
+      </div>
+
+      <p>그리고 Dalfocal은 여기에 <strong>메모 · 전역 노트 · 빠른 캡처</strong>를 붙여, 카드가 되기 전의
+        생각까지 새어 나가지 않게 잡아 둡니다.</p>
+      <ul class="plain">
+        <li><strong>메모</strong> — 오른쪽 패널의 가벼운 쪽지입니다. 아직 할 일까지는 아닌 생각을 툭 적어 둡니다.
+          일이 되면 <span class="cap">space</span> 한 번으로 그 자리에서 카드가 됩니다. (→ <a href="#hub">노트·할일·메모</a>)</li>
+        <li><strong>전역 노트</strong> — 어느 프로젝트에도 매이지 않는 노트입니다. 프로젝트를 옮겨 다녀도 늘 꺼내 볼
+          자리예요. <span class="cap">w</span>로 엽니다. (→ <a href="#globalnote">전역 노트</a>)</li>
+        <li><strong>빠른 캡처</strong> — <span class="cap">q</span> 한 번이면 <strong>어느 화면에 있든</strong> 입력창이
+          떠서, 떠오른 아이디어를 흐름 끊지 않고 바로 붙잡습니다. 인박스에 쌓아 뒀다가 손 빌 때 카드·노트·할 일·메모로
+          나눠 보냅니다. (→ <a href="#capture">빠른 캡처</a>)</li>
+      </ul>
     </section>
 
     <section id="screen">
@@ -332,7 +366,7 @@
       <h2>AI로 작업하기 (MCP)</h2>
       <div class="callout">
         Dalfocal은 <strong>MCP</strong>(Model Context Protocol)를 지원합니다. Claude 같은 AI 도구를
-        연결하면 AI가 당신의 데이터에 직접 작업합니다. MCP는 <strong>동기화 서버를 거쳐</strong>
+        연결하면 AI가 내 데이터를 직접 만들고 고칩니다. MCP는 <strong>동기화 서버를 거쳐</strong>
         데이터를 읽고 쓰므로, 먼저 <a href="#sync">동기화</a>에서 서버 주소를 넣어 두어야 합니다.
       </div>
 
@@ -370,7 +404,7 @@
 }</code></pre>
       <p>Claude Code(CLI)라면 터미널에서 한 줄로도 됩니다.</p>
       <pre><code>claude mcp add dalfocal -- "C:\경로\dalfocal-mcp.exe" --sync 내호스트:50052</code></pre>
-      <p>등록한 뒤 그 도구에서 AI와 대화만 하면, AI가 당신의 보드를 읽고 씁니다.</p>
+      <p>등록한 뒤 그 도구에서 AI와 대화만 하면, AI가 내 보드를 읽고 씁니다.</p>
     </section>
 
     <section id="settings">
@@ -492,7 +526,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Dalfocal — 로컬 퍼스트 키보드 칸반</p>
+    <p>Dalfocal — 인터넷 없이 내 기기에서 도는 프로젝트 보드</p>
     <nav>
       <a href="index.html">홈</a>
       <a href="index.html#beta">베타 참여</a>
