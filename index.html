@@ -396,6 +396,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-con
 footer nav{display:flex;gap:1.1rem;flex-wrap:wrap}
 footer a:hover{color:var(--ink)}
 
+/* comments + AI thread */
+.cmt{padding:1rem;display:flex;flex-direction:column;gap:.7rem;background:linear-gradient(0deg,var(--bg-2),transparent 55%)}
+.cmt .cline{border-bottom:1px solid var(--line-2);padding-bottom:.55rem;font-family:ui-monospace,Menlo,monospace;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.msg{display:flex;gap:.55em;align-items:flex-start}
+.av{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.66rem;font-weight:700;font-family:ui-monospace,Menlo,monospace;color:#fff;background:var(--dim)}
+.msg.you .av{background:var(--accent)}
+.msg.ai .av{background:linear-gradient(135deg,var(--accent),var(--spark));box-shadow:0 0 14px -3px var(--accent)}
+.who-t{font-size:.68rem;color:var(--dim);margin-bottom:.22rem;font-family:ui-monospace,Menlo,monospace}
+.who-t b{color:var(--ink-2)}
+.bub{background:var(--panel);border:1px solid var(--line);border-radius:11px;border-top-left-radius:3px;padding:.5em .75em;font-size:.85rem;line-height:1.45}
+.msg.ai .bub{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.did{display:inline-flex;align-items:center;gap:.32em;margin-top:.45rem;font-size:.66rem;font-family:ui-monospace,Menlo,monospace;color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent);padding:.16em .5em;border-radius:6px}
+
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -594,6 +607,29 @@ footer a:hover{color:var(--ink)}
         <span><span class="cap key" data-key="Shift">⇧</span> + hjkl <span class="en">move card</span><span class="ko">카드 옮기기</span></span>
         <span><span class="cap key" data-key="KeyX">x</span> <span class="en">done</span><span class="ko">완료</span></span>
         <span><span class="cap key" data-key="Enter">↵</span> <span class="en">open</span><span class="ko">열기</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMENTS + AI ===================== -->
+<section id="ai" class="wrap">
+  <div class="row">
+    <div class="copy">
+      <p class="eyebrow"><span class="en">Comments</span><span class="ko">댓글</span></p>
+      <h3><span class="en">Every card can talk — and your AI talks back.</span><span class="ko">카드마다 대화 — AI도 같이.</span></h3>
+      <p><span class="en">Card comments aren't just notes to yourself. Connect your AI assistant over MCP and it reads the thread, replies, and actually edits the board right there — checklists, due dates, priority.</span><span class="ko">카드 댓글은 혼잣말이 아니에요. MCP로 내 AI 어시스턴트를 연결하면 스레드를 읽고 답하고, 그 자리에서 보드를 실제로 고쳐줍니다 — 체크리스트·마감·우선순위까지.</span></p>
+      <p><span class="en">No copy-pasting into a chatbot, no lost context. The work and the conversation live in one place.</span><span class="ko">챗봇에 복붙할 일도, 맥락 잃을 일도 없이. 일과 대화가 같은 자리에 있습니다.</span></p>
+      <div class="tags"><span class="chip a"><span class="en">works today · via MCP</span><span class="ko">지금 되는 기능 · MCP</span></span><span class="chip"><span class="en">bring your own AI</span><span class="ko">내 AI 연결</span></span></div>
+    </div>
+    <div class="panel">
+      <div class="chrome"><span class="tt"><span class="moon"></span><span class="en">Card · Launch week</span><span class="ko">카드 · 출시 주간</span></span><span class="sp mono">✎ ⌫</span></div>
+      <div class="cmt">
+        <div class="cline"><span class="en">Comments</span><span class="ko">댓글</span></div>
+        <div class="msg you"><span class="av">Y</span><div><div class="who-t"><b><span class="en">You</span><span class="ko">나</span></b> · 09:12</div><div class="bub">@ai <span class="en">split this into steps and set a due date</span><span class="ko">단계별로 쪼개고 마감일도 잡아줘</span></div></div></div>
+        <div class="msg ai"><span class="av">AI</span><div><div class="who-t"><b>AI</b> · 09:12</div><div class="bub"><span class="en">Added 5 checklist items and set Friday as the due date. Want the announcement drafted in Notes?</span><span class="ko">체크리스트 5개 추가하고 마감을 금요일로 잡았어요. 공지 초안도 노트에 써둘까요?</span><div class="did">✓ <span class="en">edited card</span><span class="ko">카드 수정함</span></div></div></div></div>
+        <div class="msg you"><span class="av">Y</span><div><div class="who-t"><b><span class="en">You</span><span class="ko">나</span></b> · 09:13</div><div class="bub"><span class="en">yes — and bump the priority</span><span class="ko">응 — 우선순위도 올려줘</span></div></div></div>
+        <div class="msg ai"><span class="av">AI</span><div><div class="who-t"><b>AI</b> · 09:13</div><div class="bub"><span class="en">Done — priority is High now.</span><span class="ko">완료 — 우선순위 '높음'으로.</span><div class="did">✓ <span class="en">priority → High</span><span class="ko">우선순위 → 높음</span></div></div></div></div>
       </div>
     </div>
   </div>
