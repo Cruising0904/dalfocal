@@ -1,947 +1,182 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dalfocal — From a spark to done</title>
-<meta name="description" content="A local-first, keyboard-first project hub. Toss a thought into a note, turn it into a card right where it sits — boards, notes, to-dos in one project. Works offline, no account. One-time purchase. 생각을 그대로 할 일로.">
-<meta property="og:title" content="Dalfocal — From a spark to done">
-<meta property="og:description" content="Boards, notes, to-dos in one project. Keyboard-first, works offline, no account. One-time purchase — 떠오른 생각을 그대로 할 일로.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#131120">
-<meta property="og:image" content="https://dalfocal.com/icon.png">
+<title>달포컬 Dalfocal</title>
+<meta name="description" content="생각은 캔버스에 툭, 할 일은 칸반으로. 노트와 캘린더까지 내 PC에. 달포컬 2, Windows 먼저.">
+<link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-<style>
-/* ============================================================
-   Dalfocal landing — "twilight" editorial identity
-   달(moon) + focal · keyboard-first · local-first · dusk
-   ============================================================ */
-
-:root{
-  /* light = daylight counterpart (base tokens) */
-  --bg:#F5F3FB;
-  --bg-2:#ECE8F8;
-  --panel:#FFFFFF;
-  --panel-2:#F2EEFC;
-  --line:rgba(40,26,80,.12);
-  --line-2:rgba(40,26,80,.07);
-  --ink:#211C36;
-  --ink-2:#3B3552;
-  --dim:#6A6488;
-  --accent:#5B5BD6;
-  --accent-2:#4A3FB0;
-  --accent-soft:rgba(91,91,214,.12);
-  --spark:#B4791A;
-  --spark-soft:rgba(180,121,26,.14);
-  --good:#2E9E63;
-  --glow:none;
-  --shadow:0 18px 40px -24px rgba(40,26,80,.45);
-  --shadow-sm:0 6px 16px -10px rgba(40,26,80,.4);
-  color-scheme:light;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#131120;
-    --bg-2:#0e0c19;
-    --panel:#1b1930;
-    --panel-2:#241f3a;
-    --line:rgba(255,255,255,.09);
-    --line-2:rgba(255,255,255,.05);
-    --ink:#ECEAF6;
-    --ink-2:#CFC9EA;
-    --dim:#A6A0C6;
-    --accent:#8B7CFF;
-    --accent-2:#A99BFF;
-    --accent-soft:rgba(139,124,255,.16);
-    --spark:#F6C86B;
-    --spark-soft:rgba(246,200,107,.16);
-    --good:#5FD08A;
-    --glow:0 0 44px -8px rgba(139,124,255,.35);
-    --shadow:0 30px 60px -30px rgba(0,0,0,.75);
-    --shadow-sm:0 10px 26px -16px rgba(0,0,0,.7);
-    color-scheme:dark;
-  }
-}
-/* explicit toggle wins both directions */
-:root[data-theme="light"]{
-  --bg:#F5F3FB;--bg-2:#ECE8F8;--panel:#FFFFFF;--panel-2:#F2EEFC;
-  --line:rgba(40,26,80,.12);--line-2:rgba(40,26,80,.07);
-  --ink:#211C36;--ink-2:#3B3552;--dim:#6A6488;
-  --accent:#5B5BD6;--accent-2:#4A3FB0;--accent-soft:rgba(91,91,214,.12);
-  --spark:#B4791A;--spark-soft:rgba(180,121,26,.14);--good:#2E9E63;
-  --glow:none;--shadow:0 18px 40px -24px rgba(40,26,80,.45);
-  --shadow-sm:0 6px 16px -10px rgba(40,26,80,.4);
-  color-scheme:light;
-}
-:root[data-theme="dark"]{
-  --bg:#131120;--bg-2:#0e0c19;--panel:#1b1930;--panel-2:#241f3a;
-  --line:rgba(255,255,255,.09);--line-2:rgba(255,255,255,.05);
-  --ink:#ECEAF6;--ink-2:#CFC9EA;--dim:#A6A0C6;
-  --accent:#8B7CFF;--accent-2:#A99BFF;--accent-soft:rgba(139,124,255,.16);
-  --spark:#F6C86B;--spark-soft:rgba(246,200,107,.16);--good:#5FD08A;
-  --glow:0 0 44px -8px rgba(139,124,255,.35);
-  --shadow:0 30px 60px -30px rgba(0,0,0,.75);
-  --shadow-sm:0 10px 26px -16px rgba(0,0,0,.7);
-  color-scheme:dark;
-}
-
-:root{--appicon:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAJRxJREFUeAHt3U1wled5N/Ab8aUPUwMWaSC1hM3GGHdjyVkZe9EYk5k2neCZbBonWZXs6nQp3B10GbI0u2ScbjyFTJ3OxIndhcGrBrKp+eg7No6UGCdGBvwShMRnz3WUgwUI6ejonOc8H7/fzMmRQIkx0ej6P9d93fe94uOPP76dyI2rV2+nixfjdTNduHA7TU/frr3fqr9PTd1Kly7dvutr49cBumXDhp76e29vvFak/v6e+vvGjY33FfX3LVtWpr6+FYn8WJXoiosXb6UPP7xZf48Cf+7cjXrhV9CBIomfYXe7+cCvjSCwYUOEgpX1QLBlS0/t89l3srdCB6DzGsX+k09upQ8+uKbQA8wRwWDz5p70V3+1Oj3+uFCQFQGgA6Lgv//+jdpT/c108uR1xR5giWJpIboETz21uhYOBIJOEADaINbio9ifOnWzVvivzdMSA2A5IhBs27Yy7dgRXYJV5gnaQABoURT948ev157wr9WK/y1P+QAZiiAQ3YHHHltZHzhk6QSAJYiif/LkjVrhn0lnz95MAHRfhICvfnVtevJJnYGlEACa8OGHN+rt/V//esaTPkBOxTDhU0+tSiMja2rLBTa5LUYAeIB42n/vvWv1Ib5Y3wegOGJmYNeuXksECxAA7uFpH6BcRkdXp699rVcQuIcA8GdR+N9+e9raPkBJRTcgugKWB2ZVPgAo/ADV0lgeGBlZnaqssgFA4QeotqoHgcoFAIUfgLkiCHzrW32VWxqoTACISf4337yq8AMwr6oNC5Y+AMR2vnfemUnHjs0kAFhMVYJAqQPAsWPX6u1+2/kAWIoqzAeUMgBo9wPQDhEE9u4dKGU3oFQBQLsfgE544YU1tVdfKpPSBICY7n/jjal08aJ2PwDtV7ZuQCkCwM9/Pu2pH4BMlKUbUOgAcOHCzfSTn1xJn3ziqR+A7JShG1DYAGDCH4Bu6u1NadeutenZZ3tTERUuABj0AyBPnntuTfqbv+lNfX0rUpEUKgBo+QOQR0VcEihMAIgp/5/8ZErLH4BcihDwjW/0ph07inF4UCECQKz3//znVxMA5F1Rdgnk/uojW/wAKJK3376WZmpl62//Nt8hILcdgBj2i/V+x/kCUESPPbYyfe97A7kdDsxlADDsB0AZ5Hk4MHd/oij+hw4p/gAU38WLt+o17cKFWylvchUAGsXfef4AlEVeQ0BuAkBc4av4A1BGeQwBuQgAUfxfe03xB6C8IgT86EeXazUvHyGg6wEg2v5R/B3wA0DZTU+nWs3LRwjoagBorPkr/gBURYSA2OnW7eWArgUAA38AVFUeZgK6EgAUfwCqrtshIPMAECf8Kf4AMBsCYjkgamPWMg8A8S+q+APArE8+uZV+/OMrKWuZBoC42MfZ/gBwt48+upn+8z+zvfU2swDw9tszbvUDgAc4evRaeu+96ZSVTALAyZPXawEgu38pACiiN9+cSR9+eCNloeMBICb+33wz27YGABRVVmcEdDQAmPgHgKVpHBTU6Z0BHQ0A77wzo/gDwBLFzoD/+q/OLp13LAAcO3bN0B8AtKjTQ4EdCQCx7m/oDwCW51e/munYPEBHAoALfgBg+RrzAJ3Q9gAQ+/2t+wNAe8Q8QCcOCWprAND6B4D2i3mAdp8P0NYAEK1/AKD93njjalu3BrYtAGj9A0DnxM2B7dwa2JYAoPUPAJ0XSwHnzrVnV0BbAoDWPwBk4z/+Yyq1w7IDwPHj17X+ASAjcXVwOw4IWlYAmG39u+gHALIUBwQtdyBwWQHgnXeuefoHgIzFAUHLHQhsOQDE0//x49cSAJC95Q4EthwA4ukfAOie5QwEthQA4jQiT/8A0F0xENjqCYEtBYA33mjPFgQAYHl+9avWZgGWHABs+wOA/Gi1C7DkAGDbHwDkSytdgCUFAE//AJA/rXQBlhQAPP0DQD4ttQvQdACIZOHpHwDyaaldgKYDQFz3CwDk11K6AE0FgDj17+zZ1vYZAgDZWEoXoKkA4NQ/ACiGkyevN/V1iwYAZ/4DQHFEzW7mpsBFA8DZs61fNAAAZCtuCnzvvcVnARYNALb+AUCxvP/+zUW/ZsEAYOsfABTPJ58sPgy4YAA4caK5QQIAIF8WGwZ8YACYnr7d9CQhAJAviw0DPjAAvP/+jaamCAGA/IlhwFOnHrwM8MAAYOsfABTbf//3g0/xnTcAOPkPAIovTgZ8UDd/3gBg7z8AlMOJE/N39OcNAAutGQAAxfE//zP/QP99ASCm/99/3/o/AJRBnAkw3zLAfQHggw8WPz0IACiG2A1w7tz9tf2+AHDqlL3/AFAm853rc18A+PBDAQAAyuTkyftn++4KAB9/fNPZ/wBQMhcv3rqvvt8VAD75xPY/ACijkyfvHvC/KwDY/gcA5RRd/rnuWQKw/g8AZXTvIOCdAGD9HwDKK7YDzq3zdwKA4g8A5Tb3np87AeCjj6z/A0CZffzxPAHg3uEAAKBcPvzwi1p/JwDEWcEAQHldvHhPAIin/wfdFwwAlMPcQcB6ADAACADV0BgErAcA7X8AqIYLF2ZP/f1zAHAEMABUwYULsw/9PbOfCAAAUAXnzs3pAMydCgQAyqtR83ump2/bAQAAFRE7AaLu9zgACACqJXb/9Vy9mgCACrl48Vbqif8AAKoj5gDqMwAAQHVE918HAAAqJs4CWBXTgADk28DAyvT00w+l4eHeNDi4Om3d2pv6+3tqr5V3vmZy8no6f/56Gh+fTqdPX0kTE9dqn19LcK/oAKyamtIBAMijKPrPPvtwGh19KG3fPrDo10cwiNf27f1p9+6N9V+bmJhOv/jFhXTmzFVhgDuuXr2lAwCQN1H4X3xxQ72Iz33Cb8XQUG/au3dL/eOjRy+ln/3sM0GAdOnS7QgAhgAB8mLPnsG2FP75PPfc+vrr8OHztSAwmai2VQmArtu0aXV65ZWv1Nb4+1KnvfTSpvT88w+nAwd+pxtQYSv+4R9OaQEAdNHOnQ+nl1/+y4489S9kaupmOnToXDpx4k+Jaunt/fNlQAB0R7T8Y40+6+If4p/5gx88mr75zcFEtcT8nwAA0CVR/Pfs2ZS6LZYEhIDqEQAAumBkZF0uin9DhICdO/8iUR0CAEDGYuBv797NKW9efvnLtT/bmkQ1CAAAGRsbG+rKmv9iZmcCvpKoBgEAIEOx7p/np+w4OMg8QDUIAAAZidZ/ntb9H+TrX99YP42QchMAADIST/9FEEsBu3ZtSJSbAACQgXj637lzfSoKXYDyEwAAMvDEE4vf5pcn0QWwLbDcBACADOzeXbyW+siIAFBmAgBAh0X7f3i4NxXN9u39lgFKTAAA6LBHHy1e8W8YGXkoUU4CAECH7djR+St+O6XI4YWFCQAAHTY8XNwAEMsXlJMAANBhg4PFLaJFnF2gOQIAQIcVOQAMDCgTZeX/WQAeKI+XFtEeAgAAVJAAAAAVJAAAQAUJAABQQQIAAFSQAAAAFbQqAYUWe8zjtLZ4jy1b8XFc4NLX11N/n3uS22L70Scnr9ffp6ZupitXbt35tfPnr9U/n5y8Vvu9W7XPr9/5WqCYBAAogCjkUbyHhtbWT2aLj7du7W37ATNf/O819787MTFdDwbj49P1UBCfT0zM1H7tZgLyTQCAnIliH4V+aKi3fh1rJwp9u8SfMcSfc64IAp9+ej2dPj0lFEBOCQDQZVHwn3iir1ZEB9KTT/bfKapFFv8O8RodXXfn1yIInDo1VQsFV9KZM1cFAugyAQC6IJ6Yv3gNpCpohILduzfWP4/uQCwdnDhxuf4xkC0BADLQaOs/99z6NDLykPPV0xchKAJBDBdGdyDCwIkTf0pA5wkA0CGKfvMGB9fU/p7W1P+uYgfC8eOXhQHoMAEA2iyeakdG1tWK2cOKfgvi7yyCQLwanYFjxz63TABtJgBAG8TT/osvbqgX/timR3vM7QxEGDh8eLI+QBjnEgDLIwDAMnjaz06Egb17t9Q/Pnr0UvrlLy/WhwiB1ggA0IIo/Hv2DFZmgj9vGksEsSwQYSCWCIClEQBgCXbuXF8r/I+kTZvWJLqvsZPgpZcG68sDggA0TwCARTTW92O7mjZ/PjWWBwQBaJ4AAAvwxF8sggA0TwCAeURb+R//cbPCX1CCACxOAIA5DPeVSyMIxPLNj370se2DMIcAAGl2nf/b3/5SveVP+cTZDAcPbqvvGPjZzz4TBCAJAJBefHFjvVVswK/8Yutg3Lj4i19cqJ8jAFUmAFBZ0e6Pp/7h4b5EdcSywMsvfzl9/esb04EDv9MNoLIEACon2v0x2f/ii48kqiuCQCwLHD58vrYsMJmgagQAKsV0P/d66aVN6fnnH9YNoHJ6ElTEyy9/Ke3bN6z4c59GN+Cb3xxMUBUCAKW3adPq2tPdVi1/FhXdgB/9aJuQSCUIAJRaTPgfOPCYQT+aFt2A2cC4IUGZmQGglAz6sRyxJTR2CkT3KM4NuHLlZoKy0QGgdOKH9tjYo4o/y7Z79yP1boAlAcpIAKBUYspfy592iiWBffseTSMjDyUoEwGA0ogz/GPK34l+tFuEgB/84FG7BCgVAYBSiC1+e/ZsStBJsUsgTo+EMhAAKLQY9tu3b8h6P5mJuYB//dfH6t97UGQCAIUVw3779291dS+ZGxrqNRxI4QkAFNLspP+QH8B0TWM40PcgRSUAUDhxt7viTx4IARSZAEChRPGPNX8/cMmLxsmB8b0JRSIAUBiN4m+bH3kT35PxvSkEUCQCAIWg+JN3QgBFIwCQe4o/RSEEUCQCALkW0/6KP0UiBFAUAgC51djqp/hTNPE9+4MffMWwKrkmAJBL9vlTdLYIkncCALkTR6wq/pRBIwRAHgkA5M7YmKcmyiNCAOSRAECuxK1+w8N9CYDOEgDIjT17Bt3qB5ARAYBcGBlZVwsAmxIA2RAA6LqY+P/2t7+UAMiOAEBXmfgH6A4BgK7as+cRxR+gCwQAuubFFzca+gPoEgGAroh1/5deGkwAdIcAQFc44x+guwQAMhf7/a37A3SXAECmovVvvz9A9wkAZCpa/wB0nwBAZrT+AfJDACATWv8A+SIAkAmtf4B8EQDouDjwR+sfIF8EADoqWv+7d29IAOSLAEBHGfwDyCcBgI6Jp/+dO9cnAPJHAKBjXnnlrxIA+SQA0BHx5D883JsAyCcBgI7Ys8c1vwB5JgDQdvH0b/APIN8EANrO0z9A/gkAtJWnf4BiEABoK0//AMUgANA2nv4BikMAoG08/QMUhwBAW3j6BygWAYC2eP75hxMAxSEAsGxx4t8TT/QnAIpDAGDZXPcLUDwCAMvixj+AYhIAWJYnnhhIABSPAMCy2PoHUEyrErQoBv+KvPXv9Okr6ejRz2vvU2ly8nrqhqGhtWl4uC8988xD6emn1yWArAgAtKyoW/+i2B86dK5e+LttYmKm/jp27FIaHFydXn11uP4O0GmWAGhZEbf+TUxMp7Gxj3JR/O8VwWRs7GwaH59OAJ0mANCSaFcXrf0fBXb//ok0NXUz5dXU1K104MB415YkgOoQAGhJrFkXTd6Lf0OEgNdeO5cAOkkAoCUjI8UaWDt+/HLtqfpaKoozZ6bqL4BOEQBYsmj/9/evTEXym99cTkXz7ruXEkCnCAAsWRHb/+PjM6lo8jioCJSHAMCSFXH6v4iT9QYBgU4SAFiSoh/+A8AsAYAlKWL7PxQxtMQ1ywCdIgCwJHFsbRFt3168P/fQkAAAdI4AQNP6+3sKuf4finhl8ehoMbstQDEIADStyFf/bt/eX38VxaZNqwt31gJQLAIATduxo5jt/4a9ezengYH8n18Qf8axsaEE0EkCAE0rcgcgDA6uSfv2DeU6BMwW/0fttAA6TgCgKbH+X4ap9BisO3Bgay4LbCxR7N+/tbCDlkCxrErQhDJNpEcn4ODBbfX7AU6cuJwmJma6dlDQ4ODqeuF/7rmHa+/F7rAAxSIA0JQy7kkfHV1XfwFUkSUAmvLkk8Xc/gfA/AQAmhKtagDKQwBgUWUZAATgCwIAi3IkLUD5CAAsytM/QPkIACzqS1+yWQSgbAQAFuVgGoDyEQBYVF+fbxOAsvGTnUWZAQAoHwGABdn/D1BOAgALEgAAykkAYEH9/fm9OheA1gkALGjTJh0AgDISAFjQwIBvEYAy8tOdBekAAJSTI95Y0KZNa1JZnT59JR09+nntfSpNTl5PZTQ0tLZ+kNMzzzyUnn56XQJoEAConCj2hw6dqxf+spuYmKm/jh27VN/R8eqrw3Z2AHWWAFhQ2U4BnJiYTmNjH1Wi+N8rgs/Y2Nk0Pj6dAAQAFjQwUJ5tgFEA9++fSFNTN1NVTU3dSgcOjJd2yQNongBAZVS9+DdECHjttXMJqDYBgAWVZb34+PHLtafea4lZZ85M1V9AdQkAVMJvfnM5cbd3372UgOoSAKiE8fGZxN2qOAgJfEEAoBJMvt/PICBUmwAAABUkAFAJZT7RsFXDw70JqC4BgErYvr0vcbehIQEAqkwAoBJ27lyfuNvo6EMJqC4BgAWVZVBs+/b++otZccvjyIjLgaDKBAAqY+/ezaU62rhV8XcwNjaUgGoTAKiMwcE1ad++oUqHgNni/6ihSEAAYGFl2yseg28HDmytZAGMJZD9+7em4WEDkUBKqxIs4MqV8l2eE52Agwe31e8HOHHicpqYmCntQUFxl0MU/ueee7j2PpAAGgQAFlTm2/NGR9fVXwBVZAmABbk+F6CcBAAW9OmnNxIA5SMAsCAdAIByEgBY0PnzbowDKCMBgAW5MhagnAQAFiQAAJSTAMCihACA8hEAWFRZD8kBqDIBgEVNTl5LAJSLAMCifvvbmQRAuQgALCrOygegXAQAFnX+vCUAgLIRAFjU1NQtOwEASkYAoCl2AgCUiwBAU06dmkoAlMeqBE0oYwfg9Okr6ejRz2vvU5Y4WjQ0tDYND/elZ555KD399LoEFIcAQFMmJsoTAKLYHzp0rl74WZ7YIRKvY8cupcHB1enVV4fr70D+WQKgKTEIWIYuQASZsbGPFP8OiGA1NnbWvAgUhABA086cuZKKLArU/v0TtTBzM9EZERQPHBi3pAIFIADQtJMnr6YiU/yzESHgtdfOJSDfBACaVuQOwPHjl91pkKEzZ6bqLyC/BACaFk92Rf2h/pvfXE5k6913LyUgvwQAluTUqWJ2AcbH3WeQNYOWkG8CAEtS1AOBTKZnzyAg5JsAwJLEEoBBOoDiEwBYshMnireevmnTmkS2hod7E5BfAgBL9u67n6ei2b69L5GtoSEBAPJMAGDJ4jS9oi0D7Ny5PpGt0dGHEpBfAgBLFtsBi7YMsH17f/1FNjZtWp1GRlwOBHkmANCSIi4D7N27OQ0MrEx0Vvwdj40NJSDfBABaUsRlgMHBNWnfviEhoINmi/+jhi6hAAQAWhLLAHEFbNHEYNqBA1sVqA6IJZb9+7em4WEDl1AEqxK06Ne//lN68cVHUtFEJ+DgwW31+wFiliHus3dQUGsGB1fXC/9zzz1cex9IQHEIALQsDgWK4jk0tDYV0ejouvoLoIosAbAsx4///wRA8QgALMtbb11wNDBAAQkALEtRhwEBqk4AYNliGBCAYhEAWLYYBowXAMUhANAW//7v5xMAxSEA0BbRAZicvJ4AKAYBgLY5fHgyAVAMAgBtE7sBbAkEKAYBgLaKcwEAyD8BgLaKAGAWACD/BADaKg4GMgsAkH8CAG0XswC6AAD5JgDQEa+9di4BkF8CAB3hdECAfBMA6BinAwLklwBAx0QHwE2BAPkkANBRr7/+R4cDAeSQAEBHxbbAI0dsCwTIGwGAjovDgcbHpxMA+SEAkIlYCgAgPwQAMhEDgb/85WcJgHwQAMhMHBHshECAfBAAyEwMBDohECAfBAAyZSkAIB8EADL3+uuf2hUA0GUCAF1x8ODvHRAE0EUCAF0Rw4AOCALoHgGArokDgswDAHSHAEBXxdZA8wAA2RMA6KrYGmgeACB7AgBdF/MAP/zh7xMA2REAyIU4H+DIkfMJgGwIAORG7AowFAiQDQGAXIlDgqIbAEBnCQDkzg9/+DuXBlEavpfJKwGA3ImdAfv3j/vBSeHF9/D+/RMJ8kgAIJdmf3AKARRXo/hPTl5LkEcCALk1uz3wd84IoHBmu1iKP/kmAJBrExMz9U6AEEBRfLGEpfiTbwIAuScEUBSN4j8x4Xhr8k8AoBCEAPJO8adoBAAKQwggrxR/ikgAoFAiBIyNfWR3ALnR2LGi+FM0AgCFY4sgedHY6qf4U0QCAIUkBNBt9vlTdAIAhRU/gMfGzqbxcU9fZOv06St/XopS/CkuAYBCi+Grffs+cosgmfnFLy6kAwcmDKNSeAIApRC3CB45cj5BJx0+fD7927/9MUEZrEpQEkeOTNaWA2bSyy//ZRocXJ2gXaLTdPDg72qtf1dVUx46AJTKiROXDQfSVjHhH+v9ij9lIwBQOo3hQHMBLFes95v0p6wsAVBK0bKNuYDz52+kPXsGU3//ygTNiu+fI0c+TW+9dTFBWQkAlNpbb11Ix49fTq++OmwugKZEy/+HP/zYUz+lZwmA0oslgVde+cAuARYVLX/7+6kKAYDKiF0CEQQMCHKv+J44cGDcFj8qRQCgUnQDuFfjqd+UP1VjBoBKim7A0aOfmw2osFjrf/31Pyr8VJYAQGU1ugG7d2+svwSBajDhD7MEACqvsVPgpZcG086d6xPldfTopfTTn37qHH9IAgDURTfg0KFP0uHDk+mf//nRNDS0NlEecXtfLPto98MXBACYo3GKYHQCoiNgWaDYZoPdOYUf5iEAwDyOHbtUfwkCxRSFP3Z6xKAnMD8BABYgCBRLDPi99dZn9QE/6/ywMAEAmiAI5Jsnflg6AQCWYG4QeP75h9MTT/QnusdwH7ROAIAWNIJA7Bb4+tc32j6YoWjzx3a+EycuK/ywDAIALMPExMyd7YPbtw9YHuigOLkvzmuwvg/tIQBAG8QadKMrEMsCsTwQgUAYWB5P+9A5AgC02ZkzU/VXGBlZl0ZHH6q9/0Xq73f3VjOi6EfBj8I/Pj7jaR86RACADopCFq+UPrkTBnQG7qfoQ/YEAMjIF2Eg1ZcJRkfXpa1beyu7kyAm+KOt33gB2RIAoAvmLhP096+sdQX677yGh3tTGY2PT99V8D3lQ3cJANBlUQjndgciEMT2wugOPPlkf3rkkdWFCwUxFBlT+6dOTdULv7Y+5I8AADkThbLRIYirisPcUBDzA/He19fT9WDQKPSffnr9z4V+uvZrNxR7KAABAApgbii4VwSCeA0MrEybNq2u7zbYtGlN/eMQQSF+r/G1C4mCPvfj+OdeuXKr9rpZ/zzez5+/Xv947tcCxSMAQMEpxkArbEwGgAoSAACgggQAAKggAQAAKkgAAIAKEgAAoIIEAIAOczASeSQAAHRY3HZYVHHwE+UkAAB0WByRXFQOmSovAQCgwyYnr6Wi+u1vixteWJgAANBhv/3tTCqq//3fqUQ5CQAAHda46rmIihxeWJgAANBhMQQ4302OeTc+PlPo5QsWJgAAZODXvy5eF+CXv/wsUV4CAEAGjh27VLjzAE6dupooLwEAIAOxDPDWWxdSURw9ekn7v+QEAICMRAAoShfgyBHt/7ITAAAyUpQuwOHD5z39V4AAAJChI0cmc30yYJz897OfTSbKTwAAyNjBg7/P5VJAdCj2759IVIMAAJCxeMr+6U//mPLm0KFzWv8VIgAAdMHRo5/XlgPOp7yIdf8in1jI0gkAAF0S8wB5CAFR/K37V8+qvr4V6erV2wmA7M0OBc6kvXs3p/7+lSlLseb/+ut/SMeOfZ6onp6+Pk0AgG6K1vvY2Ef12YCsTExM1/+Zin81bdjQYwkAIA+i+L/yygcdXxKIp/74Z8wGDgN/VbYqAZAbsSQQA4IvvTSYdu5cn9pl9hCiz2qvi4W7k4D26+1dkVb8y7/8v9tnz95IAOTL4ODqtH37QNq9e0MaHu5NrTh9+kptieFP9VCh8NPw2GMr06r+fqsAAHkUywJxi2C8IgxECNi+vT9t3dpb/zxeDfGEHwU+1vY//fR6/bTBKPyKPvOJ+b9Vva2FSgAyFGEgXvbq0w59fSn1xCQgAFAdGzeuTD0xCAAAVIcOAABU0IYNKyMA6AAAQJVE97/nkUd0AACgSrZs6ZmdAYj7AACA8ovdf1H364//sRYAAJRfo+bXA0C0AgCA8msM//fM/QQAKLevfGVOB2D9ejMAAFAFW7bMCQDbtrkUEACq4K4lgI0be+wEAICSix0Ajbm/O4v/dgIAQLlt3vxFrb8TALZtEwAAoMwaA4DhTgD48pftBACAMtu2bfWdj+d0AAwCAkCZzd32f+cjg4AAUF5R/Oce/HdX33/HjtUJACifuQOAoWeh3wQAyuGv//ruh/x7OgDmAACgjBbsAMQcwMaNugAAUCb3rv+H+/b+6QIAQLk8/vj9D/f3BYAnnxQAAKBMnnpqzX2/dl8AiFOCbAcEgPJoqgPQ27vCbgAAKIknn1w974P9vOf/Og8AAMrh3u1/DfMGgGeeEQAAoAwee2z+2b55A0AsAzz+uGFAACiyxx5bmTZunH+u74FXAI6M6AIAQJF99atrH/h7DwwAsWZgNwAAFFNv78Jb+3se/F9ckUZH1yQAoHhioH+hB/mehf7LDgUCgGIaHV274O8vGAC2bVuVtmwRAgCgSOLs/23bFj7TZ8EAENwNAADFsmtX76Jfs2gA2LlzjWFAACiQB+39n2vRAGAYEACKI7bxP2jv/1yLBoBgGBAAiuGFF/qa+rqmAkAMAzoZEADybaGT/+7VVAAIL7ywNgEA+bVrV3NP/6HpAKALAAD51czWv7maDgBBFwAA8qmZrX9zLSkA6AIAQP7E0/9SL/FbUgAIugAAkC9LffoPSw4AugAAkB+tPP2HJQeAoAsAAPnwrW/1p1a0FAB0AQCg++LJfymT/3O1FADC3//90tcbAID2afbUv/m0HAA2b16Znn3WUgAAdEOzZ/4/SMsBIOzatdZNgQCQsRj8W87Tf1hWAIibAr/2NV0AAMhSbPtbztN/WFYACDt3rjUQCAAZaXXb372WHQCCgUAAyMbevQ+ldmhLADAQCACd98ILa5bd+m9oSwAIMRC4YYOBQADohHYM/s3VtgAQA4GtnkYEACysXa3/hrYFgBAnBFoKAID2amfrv6GtASB84xu9acuW1o4lBADu1u7Wf0PbA0D4znf6HBAEAMsUy+vtbv03dCQAbNy40gFBALBMMWDf7tZ/Q0cCQIgDgswDAEBrnn12TUfraMcCQIjkYh4AAJZmdt2/s4fsdTQAxNqFeQAAaF4U/1j373Tt7GgACDEP8J3vOB8AAJoRu+k6te4/V8cDQIjzAf7u79wXAAALif3+O3Ys/6KfZmQSAIKhQAB4sBj668R+/wfJLACEaGu4OhgA7vb44ytrNTK74h8yDQDhe9/rtzMAAP4shv6++92BlLXMA0BjZ4CbAwGouqwm/ueTeQAIsTNg794BIQCAymoU/ywm/ufTlQAQhAAAqqrbxT90LQCECAHf+96Ag4IAqIzGBT/dLP6hqwEgbN68Mn3/+0IAAOUXxf/73+9+8Q9dDwAhQsA//ZPlAADKK9r+Ufy3bMlF6c1HAAhmAgAoq8aaf16Kf8jPnyQJAQCUTx4G/uaTqwAQhAAAymLz5nwM/M1nxccff3w75dD09O304x9PpbNnbyQAKJo43jdO+MvrkHtuA0DDm29Op/fem0kAUBRxsU/WZ/svVe5v5okLhCI9vf32dAKAvIu6VYTbb3PfAWh4//0b6ec/n0oXLxbijwtAxcQe/+9+tz9t21aMW28LEwDChQs306FDV4QAAHIlhv2++911uRz2e5BCBYAQw4G/+tWMuQAAciHW+194obdwJ9oWLgA0HDs2k955ZyZdvaobAED2ouW/a9faQqz3z6ewASBYEgCgG4rY8r9XoQNAw9tvz9glAEAmirDFrxmlCABBNwCAToojfb/1rb7CTPkvpjQBoEE3AIB2K+qg30JKFwCCbgAA7RDH+X7jG/25usWvXUoZABqOH79e6wZcFQQAWJKiT/g3o9QBIEQ34O23r6UTJ64lAFhMGdv98yl9AGgQBABYSJnb/fOpTABo+PDDm+mNN8wHADArCn888Zdlur9ZlQsADeYDAKqtqoW/obIBoEEQAKiWqhf+hsoHgIZYGojzA86evZEAKB+F/24CwD0MCwKUR2znGx1dm3bsWKnw30MAeIAIAmfP3rI8AFBAmzf3pKeeWlPf0lf27XytEgCaEMsDx49fSydPXk/T0/66APLI0/7SCABLcPXq7VoIuFEPA2YFAPIh1vZHRtbWnvhXedpfAgGgRY0lgugKxAuAbMSTfhzWs2PHmtoT/2pFv0UCQBtEZ+CDD26kU6du1ELBdTMDAG0WV/FGwY/2/pYtKxX9NhAAOuDcuZu112x34Ny5GwIBwBLFU/6OHavrxX7HjlVp48ZqHM+bJQEgAxEIPvvsVvroo1v1QBCfGyYEmBXFPgr844+vrk/vb9u2UsHPgADQJY1Q8Ic/3Kp/fPHirXThwi3BACitRqHfvHm2wK9fr9h3kwCQMzFPEMsHU1O30qVLt+uBoBEM4vca7yFCA0C3REGfuxYf6/TxeaPQx/v69SvSI4/03Pk98uP/AOgUaKnmXT6cAAAAAElFTkSuQmCC")}
-
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:
-    radial-gradient(1100px 620px at 78% -8%, var(--accent-soft), transparent 60%),
-    radial-gradient(820px 520px at 8% 4%, var(--spark-soft), transparent 55%),
-    var(--bg);
-  color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
-  font-size:17px;line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-.mono{font-family:ui-monospace,"SF Mono","Cascadia Code","Segoe UI Mono",Menlo,Consolas,monospace}
-
-/* bilingual visibility */
-:root .ko{display:none}
-:root[data-lang="ko"] .ko{display:revert}
-:root[data-lang="ko"] .en{display:none}
-
-.wrap{width:min(1120px,92vw);margin-inline:auto}
-a{color:inherit;text-decoration:none}
-h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.02em;line-height:1.08}
-p{margin:0}
-::selection{background:var(--accent);color:#fff}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-
-/* ---------- shared bits ---------- */
-.eyebrow{
-  font-family:ui-monospace,"SF Mono",Menlo,monospace;
-  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--accent-2);margin:0 0 .9rem;font-weight:600;
-}
-.key{
-  font-family:ui-monospace,"SF Mono",Menlo,monospace;
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:1.6em;padding:.12em .42em;font-size:.82em;line-height:1;
-  color:var(--ink-2);background:var(--panel-2);
-  border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;
-  box-shadow:var(--shadow-sm);
-}
-.btn{
-  display:inline-flex;align-items:center;gap:.5em;
-  padding:.82em 1.35em;border-radius:11px;font-weight:650;font-size:.98rem;
-  background:var(--accent);color:#fff;border:1px solid transparent;
-  box-shadow:0 10px 24px -12px var(--accent);
-  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px var(--accent)}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line);box-shadow:none}
-.btn.ghost:hover{border-color:var(--accent);color:var(--accent-2)}
-.btn.small{padding:.55em .9em;font-size:.86rem;border-radius:9px}
-
-/* ---------- header ---------- */
-.bar{position:sticky;top:0;z-index:40;
-  backdrop-filter:saturate(140%) blur(12px);
-  background:color-mix(in srgb, var(--bg) 78%, transparent);
-  border-bottom:1px solid var(--line-2);
-}
-.bar .wrap{display:flex;align-items:center;gap:1rem;height:62px}
-.brand{display:flex;align-items:center;gap:.6em;font-weight:750;letter-spacing:-.02em;font-size:1.12rem}
-/* real app icon (Play master, inlined) — same mark the app ships with */
-.moon{position:relative;width:22px;height:22px;border-radius:27%;flex:none;
-  background-image:var(--appicon);background-size:cover;background-position:center;
-  box-shadow:0 0 16px -4px var(--accent)}
-.bar nav{margin-left:auto;display:flex;align-items:center;gap:.35rem}
-.bar nav a.navlink{padding:.4em .7em;border-radius:8px;color:var(--dim);font-size:.92rem;font-weight:550}
-.bar nav a.navlink:hover{color:var(--ink);background:var(--panel-2)}
-.toggle{font-family:ui-monospace,Menlo,monospace;font-size:.74rem;font-weight:600;letter-spacing:.04em;
-  padding:.42em .6em;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--dim);cursor:pointer}
-.toggle:hover{color:var(--ink);border-color:var(--accent)}
-.hide-sm{display:inline-flex}
-@media(max-width:820px){.hide-sm{display:none}}
-
-/* ---------- hero ---------- */
-.hero{padding:clamp(3rem,7vw,6rem) 0 2rem;text-align:center}
-.tag{display:inline-flex;align-items:center;gap:.5em;margin-bottom:1.4rem;
-  padding:.4em .85em;border-radius:999px;font-size:.78rem;font-weight:600;
-  color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--line)}
-.tag .dot{width:7px;height:7px;border-radius:50%;background:var(--spark);box-shadow:0 0 10px var(--spark)}
-.hero h1{font-size:clamp(2.5rem,6.4vw,4.6rem);font-weight:820;max-width:16ch;margin-inline:auto}
-.hero h1 em{font-style:normal;color:var(--accent-2);
-  background:linear-gradient(transparent 62%, var(--spark-soft) 62%)}
-.hero .sub{font-family:ui-monospace,Menlo,monospace;color:var(--dim);
-  letter-spacing:.05em;margin-top:1rem;font-size:1rem}
-.hero .lede{max-width:56ch;margin:1.5rem auto 0;color:var(--ink-2);font-size:1.12rem}
-.hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
-.price-note{margin-top:1rem;font-size:.86rem;color:var(--dim)}
-.price-note b{color:var(--ink)}
-.hero-meta{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem;
-  font-size:.86rem;color:var(--dim)}
-.hero-meta b{color:var(--ink)}
-.hero-meta span{display:inline-flex;align-items:center;gap:.45em}
-.hero-meta .mk{color:var(--accent)}
-
-/* ---------- app mock primitives ---------- */
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;
-  box-shadow:var(--shadow),var(--glow);overflow:hidden}
-.chrome{display:flex;align-items:center;gap:.6em;padding:.7em .9em;border-bottom:1px solid var(--line-2);
-  background:var(--panel-2)}
-.chrome .tt{font-size:.78rem;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:.5em}
-.chrome .moon{width:14px;height:14px}
-.chrome .sp{margin-left:auto;display:flex;gap:.5em;color:var(--dim);font-size:.9rem}
-.board{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;padding:.9rem;background:
-  linear-gradient(0deg,var(--bg-2),transparent 40%)}
-.col{background:var(--panel-2);border:1px solid var(--line-2);border-radius:12px;padding:.6rem;min-height:150px}
-.col h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);
-  display:flex;justify-content:space-between;margin:0 0 .55rem;font-weight:700}
-.col h4 .n{color:var(--accent-2)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:.5rem .6rem;
-  font-size:.82rem;margin-bottom:.5rem;box-shadow:var(--shadow-sm);position:relative;padding-left:.85rem}
-.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:9px 0 0 9px;background:var(--accent)}
-.card.prio::before{background:var(--spark)}
-.card.done{opacity:.55}
-.card.done .ct{text-decoration:line-through}
-.card .meta{display:flex;gap:.3rem;margin-top:.4rem;flex-wrap:wrap}
-.pill{font-size:.64rem;padding:.12em .5em;border-radius:6px;background:var(--accent-soft);color:var(--accent-2);font-weight:650}
-.pill.sp{background:var(--spark-soft);color:var(--spark)}
-.pill.dn{background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good)}
-.card.glow{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 14px 30px -14px var(--accent);transform:translateY(-2px) rotate(-1deg)}
-
-/* floating spark → card in hero */
-.hero-stage{position:relative;margin:3.2rem auto 0;width:min(940px,96vw)}
-.spark-line{position:absolute;z-index:3;left:6%;top:-22px;display:flex;align-items:center;gap:.6em;
-  background:var(--panel);border:1px solid var(--accent);border-radius:11px;padding:.55em .8em;
-  box-shadow:0 16px 34px -16px var(--accent);font-size:.86rem}
-.spark-line .cur{width:2px;height:1.05em;background:var(--accent);animation:blink 1.1s steps(1) infinite}
-.spark-line .fl{color:var(--spark)}
-@keyframes blink{50%{opacity:0}}
-
-/* ---------- generic section ---------- */
-section{padding-block:clamp(3.2rem,7vw,5.5rem)}
-.section-head{max-width:60ch;margin-bottom:2.4rem}
-.section-head.center{margin-inline:auto;text-align:center}
-.section-head h2{font-size:clamp(1.7rem,3.6vw,2.7rem);font-weight:780}
-.section-head p{color:var(--dim);margin-top:.8rem;font-size:1.06rem}
-.alt{background:
-  linear-gradient(0deg,var(--bg-2),transparent),var(--panel-2);
-  border-block:1px solid var(--line-2)}
-
-/* proof */
-.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.proof-item{padding:1.5rem;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:var(--shadow-sm)}
-.proof-item .pv{font-family:ui-monospace,Menlo,monospace;font-size:1.8rem;font-weight:750;color:var(--accent-2);
-  display:block;letter-spacing:-.03em}
-.proof-item h3{font-size:1.06rem;margin:.5rem 0 .5rem}
-.proof-item p{color:var(--dim);font-size:.92rem;margin:0}
-@media(max-width:760px){.proof{grid-template-columns:1fr}}
-
-/* thesis band */
-.thesis{text-align:center}
-.thesis .big{font-size:clamp(1.4rem,3.2vw,2.15rem);font-weight:700;max-width:26ch;margin:0 auto;line-height:1.32}
-.strike{text-decoration:line-through;text-decoration-color:var(--dim);color:var(--dim)}
-.keep{color:var(--accent-2);font-weight:750;
-  background:linear-gradient(transparent 60%,var(--accent-soft) 60%);padding:0 .1em}
-.thesis .small{color:var(--dim);max-width:44ch;margin:1.3rem auto 0;font-size:1rem}
-
-/* showcase rows */
-.rows{display:flex;flex-direction:column;gap:clamp(3rem,6vw,5rem)}
-.row{display:grid;grid-template-columns:1fr 1.12fr;gap:clamp(1.6rem,4vw,3.4rem);align-items:center}
-.row.flip .copy{order:2}
-.rnum{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;letter-spacing:.14em;color:var(--spark);font-weight:600}
-.row h3{font-size:clamp(1.3rem,2.6vw,1.8rem);margin:.7rem 0 .9rem;font-weight:740}
-.row .copy p{color:var(--ink-2);margin-bottom:.7rem}
-.row .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1.1rem}
-.tags .chip{font-size:.74rem;padding:.3em .7em;border-radius:8px;border:1px solid var(--line);color:var(--dim);background:var(--panel)}
-.tags .chip.a{color:var(--accent-2);border-color:var(--accent);background:var(--accent-soft)}
-@media(max-width:820px){.row{grid-template-columns:1fr}.row.flip .copy{order:0}}
-
-/* capture mock */
-.cap-mock{padding:1rem}
-.cmdline{display:flex;align-items:center;gap:.5em;background:var(--panel-2);border:1px solid var(--line);
-  border-radius:10px;padding:.7em .9em;font-size:.9rem}
-.cmdline .caret{color:var(--accent);font-family:ui-monospace,Menlo,monospace}
-.arrow-down{color:var(--dim);text-align:center;font-size:1.3rem;margin:.6rem 0;opacity:.7}
-
-/* hub mock */
-.hub{display:grid;grid-template-columns:1.3fr 1fr;gap:.7rem;padding:.9rem;background:linear-gradient(0deg,var(--bg-2),transparent 40%)}
-.tabs{display:flex;gap:.3rem;margin-bottom:.6rem}
-.tabs span{font-size:.7rem;padding:.28em .6em;border-radius:7px;color:var(--dim);border:1px solid var(--line-2)}
-.tabs span.on{color:var(--accent-2);background:var(--accent-soft);border-color:var(--accent)}
-.memo{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:.5rem .6rem;font-size:.8rem;margin-bottom:.5rem;box-shadow:var(--shadow-sm)}
-.memo.hot{border-color:var(--spark);box-shadow:0 0 0 1px var(--spark)}
-.tocard{display:flex;align-items:center;gap:.4em;font-size:.72rem;color:var(--spark);font-weight:650;margin-top:.3rem}
-
-/* palette mock */
-.palette{padding:1.1rem;display:grid;place-items:center;background:linear-gradient(0deg,var(--bg-2),transparent 50%)}
-.pal-box{width:100%;max-width:360px;background:var(--panel);border:1px solid var(--accent);border-radius:13px;
-  box-shadow:0 24px 50px -20px var(--accent),var(--glow);overflow:hidden}
-.pal-in{display:flex;align-items:center;gap:.55em;padding:.75em .9em;border-bottom:1px solid var(--line-2);font-size:.9rem}
-.pal-in .caret{color:var(--accent);font-family:ui-monospace,Menlo,monospace}
-.pal-row{display:flex;align-items:center;gap:.6em;padding:.55em .9em;font-size:.84rem}
-.pal-row.sel{background:var(--accent-soft)}
-.pal-row .ic{width:1.4em;text-align:center;color:var(--accent-2)}
-.pal-row .kk{margin-left:auto;color:var(--dim)}
-
-/* brain-dump canvas */
-.canvas{position:relative;height:330px;padding:0;background:
-  radial-gradient(circle at 1px 1px, var(--line-2) 1px, transparent 0) 0 0/22px 22px,
-  linear-gradient(0deg,var(--bg-2),transparent 60%);overflow:hidden}
-.frag{position:absolute;font-size:.82rem;font-weight:550;padding:.5em .8em;max-width:170px;line-height:1.3}
-/* card style */
-.frag.s-card{background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow-sm);border-left:3px solid var(--accent)}
-/* marker */
-.frag.s-marker{padding:.35em .5em}
-.frag.s-marker span{background:linear-gradient(transparent 30%, color-mix(in srgb,var(--accent) 40%,transparent) 30% 92%, transparent 92%);padding:0 .1em}
-/* sticky */
-.frag.s-sticky{background:color-mix(in srgb,var(--spark) 16%,var(--panel));border:1px solid color-mix(in srgb,var(--spark) 40%,transparent);border-radius:3px;box-shadow:var(--shadow-sm);transform:rotate(-2.4deg)}
-.frag.s-sticky::after{content:"";position:absolute;top:0;right:0;border-width:0 11px 11px 0;border-style:solid;border-color:transparent color-mix(in srgb,var(--spark) 45%,var(--panel)) transparent transparent;filter:brightness(.9)}
-/* node */
-.frag.s-node{background:var(--panel);border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:999px;box-shadow:var(--shadow-sm)}
-/* frosted */
-.frag.s-frost{background:color-mix(in srgb,var(--panel) 55%,transparent);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(6px);box-shadow:var(--shadow-sm)}
-.style-legend{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.2rem;justify-content:center}
-.style-legend .sl{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--dim);
-  padding:.3em .6em;border:1px solid var(--line);border-radius:7px;background:var(--panel)}
-.style-legend .sl b{color:var(--accent-2)}
-
-/* themes trio */
-.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.mini{border-radius:16px;padding:.6rem;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
-.mini .ct{font-size:.72rem;color:var(--dim);margin:.2rem .2rem .5rem;font-weight:600;display:flex;justify-content:space-between}
-.mini .mc{border-radius:7px;padding:.45em .55em;font-size:.72rem;margin-bottom:.4rem;background:var(--panel)}
-/* nocturne */
-.mini.t-noc{background:#171528;border-color:rgba(255,255,255,.08)}
-.mini.t-noc .ct{color:#9a93c6}
-.mini.t-noc .mc{background:#221e37;color:#d9d4f0;border-top:2px solid #8b7cff;box-shadow:0 0 16px -6px #8b7cff}
-/* linen */
-.mini.t-lin{background:#f4efe6;border-color:#e0d6c4}
-.mini.t-lin .ct{color:#9a8b70}
-.mini.t-lin .mc{background:#fffdf8;color:#4a4030;border:1px solid #d8ccb4;border-radius:14px;position:relative;padding-left:1.2em}
-.mini.t-lin .mc::before{content:"";position:absolute;left:.5em;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:#c98a2b}
-/* evergreen */
-.mini.t-eg{background:#eef3ef;border-color:#cfe0d4}
-.mini.t-eg .ct{color:#5e7a68}
-.mini.t-eg .mc{background:#fff;color:#26362b;border-left:3px solid #6a8a76;border-radius:5px}
-@media(max-width:760px){.trio{grid-template-columns:1fr}}
-
-/* demo */
-.demo-shell{border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow),var(--glow);background:var(--panel)}
-.demo-head{display:flex;justify-content:space-between;align-items:center;padding:.8em 1em;border-bottom:1px solid var(--line-2);background:var(--panel-2);font-size:.82rem;color:var(--dim)}
-.demo-head .hint{color:var(--accent-2);font-weight:650}
-.demo{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;padding:1rem;outline:none;background:linear-gradient(0deg,var(--bg-2),transparent 40%)}
-.demo .col{min-height:200px}
-.demo .col ul{list-style:none;margin:0;padding:0}
-.demo .card{cursor:pointer;display:flex;align-items:flex-start;gap:.5em;transition:transform .1s ease}
-.demo .card[data-focused="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow-sm)}
-.demo .card[data-done="true"]{opacity:.5}
-.demo .card[data-done="true"] .card-text{text-decoration:line-through}
-.demo .card .tick{color:var(--accent-2);font-family:ui-monospace,Menlo,monospace}
-.demo .card.bump{transform:scale(1.04)}
-.legend{display:flex;gap:1.1rem;flex-wrap:wrap;padding:.9em 1em;border-top:1px solid var(--line-2);font-size:.8rem;color:var(--dim);background:var(--panel-2)}
-.legend .cap{transition:transform .1s,background .1s}
-.legend .cap.lit{background:var(--accent);color:#fff;transform:translateY(-1px)}
-
-/* who */
-.who{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.who li{display:flex;gap:.7em;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:13px;background:var(--panel);box-shadow:var(--shadow-sm);font-size:.95rem;color:var(--ink-2)}
-.who li::before{content:"›";color:var(--accent);font-weight:800;font-family:ui-monospace,Menlo,monospace}
-.who b{color:var(--ink)}
-@media(max-width:760px){.who{grid-template-columns:1fr}}
-
-/* inventory fold */
-.fold{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
-.fold summary{cursor:pointer;padding:1.1em 1.3em;font-weight:680;list-style:none;display:flex;align-items:center;gap:.6em}
-.fold summary::-webkit-details-marker{display:none}
-.fold summary::after{content:"+";margin-left:auto;color:var(--accent);font-family:ui-monospace,Menlo,monospace;font-size:1.3em}
-.fold[open] summary::after{content:"–"}
-.fold summary small{color:var(--dim);font-weight:500}
-.fbody{padding:0 1.3em 1.3em}
-.flist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-.flist li{padding:.8rem;border:1px solid var(--line-2);border-radius:10px;background:var(--panel-2)}
-.flist b{display:block;font-size:.92rem}
-.flist span{color:var(--dim);font-size:.82rem}
-@media(max-width:760px){.flist{grid-template-columns:1fr}}
-
-/* pricing */
-.price-card{border:1px solid var(--accent);border-radius:20px;padding:clamp(1.6rem,4vw,2.6rem);
-  background:linear-gradient(180deg,var(--accent-soft),transparent 60%),var(--panel);box-shadow:var(--shadow),var(--glow);text-align:center;max-width:640px;margin-inline:auto}
-.price-card .amt{font-size:clamp(2.4rem,6vw,3.4rem);font-weight:820;letter-spacing:-.03em;margin:.4rem 0}
-.price-card .amt small{font-size:1rem;font-weight:600;color:var(--dim)}
-.price-card .once{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--accent-2);background:var(--accent-soft);padding:.35em .7em;border-radius:999px}
-.price-card ul{list-style:none;padding:0;margin:1.4rem 0;display:inline-flex;flex-direction:column;gap:.5rem;text-align:left}
-.price-card li{display:flex;gap:.6em;color:var(--ink-2);font-size:.95rem}
-.price-card li::before{content:"✓";color:var(--good);font-weight:800}
-.ea-note{margin-top:1.6rem;padding:1rem 1.2rem;border:1px dashed var(--line);border-radius:12px;
-  background:var(--panel-2);font-size:.88rem;color:var(--dim);max-width:640px;margin-inline:auto}
-.ea-note b{color:var(--ink)}
-.platforms{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.6rem;max-width:640px;margin-inline:auto}
-.plat{padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:var(--panel);box-shadow:var(--shadow-sm)}
-.plat .st{font-family:ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--good);font-weight:650}
-.plat.soon .st{color:var(--dim)}
-.plat h3{font-size:1.2rem;margin:.35rem 0 .5rem}
-.plat p{font-size:.85rem;color:var(--dim);margin-bottom:1rem}
-@media(max-width:640px){.platforms{grid-template-columns:1fr}}
-
-/* faq */
-.faq details{border-bottom:1px solid var(--line-2)}
-.faq summary{cursor:pointer;padding:1.05em 0;font-weight:640;list-style:none;display:flex;gap:.6em;align-items:center}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";margin-left:auto;color:var(--accent);font-family:ui-monospace,Menlo,monospace}
-.faq details[open] summary::after{content:"–"}
-.faq details p{padding:0 0 1.1em;color:var(--ink-2);max-width:70ch}
-
-/* footer */
-footer{border-top:1px solid var(--line-2);padding-block:2.4rem;color:var(--dim);font-size:.88rem}
-footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}
-footer nav{display:flex;gap:1.1rem;flex-wrap:wrap}
-footer a:hover{color:var(--ink)}
-
-/* comments + AI thread */
-.cmt{padding:1rem;display:flex;flex-direction:column;gap:.7rem;background:linear-gradient(0deg,var(--bg-2),transparent 55%)}
-.cmt .cline{border-bottom:1px solid var(--line-2);padding-bottom:.55rem;font-family:ui-monospace,Menlo,monospace;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
-.msg{display:flex;gap:.55em;align-items:flex-start}
-.av{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.66rem;font-weight:700;font-family:ui-monospace,Menlo,monospace;color:#fff;background:var(--dim)}
-.msg.you .av{background:var(--accent)}
-.msg.ai .av{background:linear-gradient(135deg,var(--accent),var(--spark));box-shadow:0 0 14px -3px var(--accent)}
-.who-t{font-size:.68rem;color:var(--dim);margin-bottom:.22rem;font-family:ui-monospace,Menlo,monospace}
-.who-t b{color:var(--ink-2)}
-.bub{background:var(--panel);border:1px solid var(--line);border-radius:11px;border-top-left-radius:3px;padding:.5em .75em;font-size:.85rem;line-height:1.45}
-.msg.ai .bub{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
-.did{display:inline-flex;align-items:center;gap:.32em;margin-top:.45rem;font-size:.66rem;font-family:ui-monospace,Menlo,monospace;color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent);padding:.16em .5em;border-radius:6px}
-
-@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
-</style>
 </head>
 <body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
 
-<header class="bar">
-  <div class="wrap">
-    <a class="brand" href="#top"><span class="moon" aria-hidden="true"></span>Dalfocal</a>
-    <nav>
-      <a class="navlink hide-sm" href="#flow"><span class="en">How it works</span><span class="ko">작동 방식</span></a>
-      <a class="navlink hide-sm" href="#try"><span class="en">Try it</span><span class="ko">직접 해보기</span></a>
-      <a class="navlink hide-sm" href="#make"><span class="en">Make it yours</span><span class="ko">내 손에 맞게</span></a>
-      <a class="navlink hide-sm" href="guide.html"><span class="en">Guide</span><span class="ko">사용법</span></a>
-      <a class="navlink hide-sm" href="contact.html"><span class="en">Contact</span><span class="ko">문의</span></a>
-      <a class="navlink" href="#buy"><span class="en">Join beta</span><span class="ko">베타 참여</span></a>
-      <button class="toggle" id="lang" type="button" aria-label="Language">KO</button>
-      <button class="toggle" id="theme" type="button" aria-label="Theme">◐</button>
-    </nav>
-  </div>
+<!-- 생성 파일. 고치려면 dalstudio-hub 의 원본을 고치고 scripts/build-dalfocal-com.py 를 다시 돌린다. -->
+<header class="top wrap">
+  <a class="mark" href="./">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="5"/><path d="M32 6 A26 26 0 0 1 32 58 A20.8 26 0 0 1 32 6 Z" fill="currentColor"/></svg>
+    달포컬
+  </a>
+  <nav aria-label="주요 메뉴">
+    <a href="./" aria-current="page">소개</a>
+    <a href="privacy.html">개인정보</a>
+    <a href="mailto:support@dalfocal.com">문의</a>
+  </nav>
 </header>
 
-<main id="top">
-
-<!-- ===================== HERO ===================== -->
-<section class="hero wrap">
-  <span class="tag"><span class="dot"></span><span class="en">Open beta · free while testing</span><span class="ko">베타 진행 중 · 테스트 기간 무료</span></span>
-  <h1><span class="en">From a spark<br>to <em>done</em>.</span><span class="ko">떠오른 생각을<br><em>그대로 할 일로</em>.</span></h1>
-  <p class="sub">— <span class="en">a moon-quiet place to think, then do</span><span class="ko">생각하고, 곧장 해내는 조용한 자리</span></p>
-  <p class="lede">
-    <span class="en">Toss the thought into a note first. When it turns out to be real work, make it a card right where it sits — no copying, no second app. Boards, notes, to-dos, all in one project.</span>
-    <span class="ko">일단 메모로 툭 던져두세요. 진짜 해야 할 게 보이면, 옮겨 적을 것 없이 그 자리에서 바로 카드로. 보드도 노트도 할 일도 한 프로젝트에.</span>
-  </p>
-
-  <div class="hero-cta">
-    <a class="btn" href="https://play.google.com/apps/testing/com.dalfocal.dalfocal" data-cta="beta"><span class="en">Join the beta — free</span><span class="ko">베타 참여하기 — 무료</span></a>
-    <a class="btn ghost" href="#flow"><span class="en">See how it flows ↓</span><span class="ko">1분만 구경하기 ↓</span></a>
-  </div>
-  <p class="price-note"><span class="en">Free while in beta. <b>One-time ₩12,000</b> at launch — <b>no subscription</b>, ever.</span><span class="ko">베타 기간 무료. 정식 출시 시 <b>일회성 ₩12,000</b> — <b>구독은 없습니다</b>.</span></p>
-
-  <div class="hero-meta">
-    <span><span class="mk">◑</span> <b>Windows</b> · Android</span>
-    <span><span class="mk">◇</span> <b><span class="en">No account</span><span class="ko">가입 없이</span></b> <span class="en">to start</span><span class="ko">바로 시작</span></span>
-    <span><span class="mk">⤓</span> <b><span class="en">Works offline</span><span class="ko">인터넷 없어도</span></b></span>
-  </div>
-
-  <!-- hero mock: a lit board with a spark turning into a card -->
-  <div class="hero-stage">
-    <div class="spark-line">
-      <span class="caret mono" style="color:var(--accent)">›</span>
-      <span class="mono"><span class="en">call the dentist </span><span class="ko">치과 예약하기 </span></span>
-      <span class="fl mono">!<span class="en">soon</span><span class="ko">급함</span> ~<span class="en">fri</span><span class="ko">금</span></span>
-      <span class="cur"></span>
+<main id="main" class="wrap">
+  <section class="product-hero" aria-labelledby="title">
+    <p class="product-name">
+      <svg class="moon" viewBox="0 0 64 64" aria-hidden="true"><circle class="shade" cx="32" cy="32" r="26"/><path class="lit" d="M32 6 A26 26 0 0 1 32 58 A20.8 26 0 0 1 32 6 Z"/></svg>
+      달포컬
+    </p>
+    <h1 id="title" lang="en">From a spark to done.</h1>
+    <p class="lede">생각은 캔버스에 툭, 할 일은 칸반으로. 노트와 캘린더까지 내 PC에.</p>
+    <div class="get">
+      <span class="btn primary" aria-disabled="true">곧 Microsoft Store에 출시</span>
     </div>
-    <div class="panel" aria-hidden="true">
-      <div class="chrome"><span class="tt"><span class="moon"></span>Dalfocal · <span class="en">This week</span><span class="ko">이번 주</span></span>
-        <span class="sp mono">⌕ ⌘P ⚙</span></div>
-      <div class="board">
-        <div class="col">
-          <h4><span><span class="en">Today</span><span class="ko">오늘</span></span><span class="n">3</span></h4>
-          <div class="card prio"><span class="ct"><span class="en">Call the dentist</span><span class="ko">치과 예약하기</span></span><div class="meta"><span class="pill sp">!<span class="en">soon</span><span class="ko">급함</span></span><span class="pill">~<span class="en">fri</span><span class="ko">금</span></span></div></div>
-          <div class="card"><span class="ct"><span class="en">Draft beta email</span><span class="ko">베타 메일 초안</span></span></div>
-          <div class="card"><span class="ct"><span class="en">Redraw the icon</span><span class="ko">아이콘 다시 그리기</span></span></div>
-        </div>
-        <div class="col">
-          <h4><span><span class="en">Doing</span><span class="ko">하는 중</span></span><span class="n">2</span></h4>
-          <div class="card glow"><span class="ct"><span class="en">Landing copy</span><span class="ko">랜딩 문구</span></span><div class="meta"><span class="pill"># <span class="en">web</span><span class="ko">웹</span></span></div></div>
-          <div class="card"><span class="ct"><span class="en">Keyboard demo</span><span class="ko">키보드 데모</span></span></div>
-        </div>
-        <div class="col">
-          <h4><span><span class="en">Done</span><span class="ko">끝</span></span><span class="n">1</span></h4>
-          <div class="card done"><span class="ct"><span class="en">Ship theme tokens</span><span class="ko">테마 토큰 배포</span></span><div class="meta"><span class="pill dn">✓</span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <p class="small">14,900원. 한 번 사면 계속 씁니다. Windows 먼저 나오고, Android는 다음 차례예요.</p>
+  </section>
 
-<!-- ===================== PROOF ===================== -->
-<section class="wrap">
-  <div class="proof">
-    <div class="proof-item"><span class="pv">1</span><h3><span class="en">One project holds it all</span><span class="ko">한 프로젝트에 전부</span></h3><p><span class="en">Cards, notes, to-dos, and quick memos in one place. Start to finish without leaving the app.</span><span class="ko">카드·노트·할 일·급한 메모까지 한자리에. 시작부터 끝까지 다른 앱 쓸 일이 없습니다.</span></p></div>
-    <div class="proof-item"><span class="pv">0<small>s</small></span><h3><span class="en">Open, and you're working</span><span class="ko">켜면 바로 일</span></h3><p><span class="en">No loading screen, no spinner. It opens where you left off.</span><span class="ko">로딩도 뱅글뱅글도 없이. 켜면 하던 일을 바로 이어갑니다.</span></p></div>
-    <div class="proof-item"><span class="pv">×</span><h3><span class="en">No account to make</span><span class="ko">만들 계정 0</span></h3><p><span class="en">No email, no password. There's no sign-up screen at all.</span><span class="ko">이메일도 비밀번호도 안 물어봅니다. 가입 화면이 아예 없습니다.</span></p></div>
-  </div>
-</section>
-
-<!-- ===================== THESIS BAND ===================== -->
-<section class="alt thesis">
-  <div class="wrap">
-    <p class="big"><span class="en">Boards move cards. But the <span class="strike">notes</span> <span class="strike">tiny to-dos</span> <span class="strike">quick memos</span> <span class="strike">links</span> that work throws off scatter into other apps.</span><span class="ko">보드는 카드만 옮기죠. 정작 일하다 튀어나온 <span class="strike">노트</span> <span class="strike">자잘한 할 일</span> <span class="strike">급한 메모</span> <span class="strike">링크</span>는 죄다 딴 앱으로 흩어지고요.</span></p>
-    <p class="big" style="margin-top:1.2rem"><span class="en">Dalfocal keeps them <span class="keep">in one place</span>.</span><span class="ko">Dalfocal은 그걸 <span class="keep">한자리에</span> 모읍니다.</span></p>
-    <p class="small"><span class="en">What to do now, why this card exists, where the thought you just had goes — all visible the moment you open it.</span><span class="ko">지금 뭘 해야 하는지, 이 카드가 왜 있는지, 방금 떠오른 걸 어디다 둘지. 앱을 켜는 순간 다 보여야 하니까요.</span></p>
-  </div>
-</section>
-
-<!-- ===================== SHOWCASE (real sequence → numbered) ===================== -->
-<section id="flow" class="wrap">
-  <div class="section-head center">
-    <p class="eyebrow"><span class="en">Spark → done</span><span class="ko">생각 → 일</span></p>
-    <h2><span class="en">One thought becomes a task, and gets finished.</span><span class="ko">생각 하나가 일이 되고, 끝나기까지.</span></h2>
-    <p><span class="en">Three steps — with no app-switching and no broken flow in between.</span><span class="ko">딱 세 걸음. 그 사이에 앱을 옮겨 다닐 일도, 흐름이 끊길 일도 없습니다.</span></p>
-  </div>
-
-  <div class="rows">
-    <!-- 01 capture -->
-    <div class="row">
-      <div class="copy">
-        <span class="rnum">01 · <span class="en">CAPTURE</span><span class="ko">붙잡는다</span></span>
-        <h3><span class="en">The instant it sparks — before it's gone.</span><span class="ko">번뜩인 순간, 날아가기 전에.</span></h3>
-        <p><span class="en">One key drops it into the inbox. Which board, which column — decide later.</span><span class="ko">키 하나면 방금 떠오른 게 인박스에 툭. 어느 보드 어느 칸은 나중에 정하면 됩니다.</span></p>
-        <p><span class="en">Type it in one line and priority, tags, and a due date attach themselves.</span><span class="ko">한 줄로 쭉 적으면 급한 정도, 꼬리표, 마감일까지 알아서 달립니다.</span></p>
-        <div class="tags"><span class="chip a">!<span class="en">urgent</span><span class="ko">급함</span></span><span class="chip"># <span class="en">tag</span><span class="ko">꼬리표</span></span><span class="chip">~<span class="en">due</span><span class="ko">마감</span></span></div>
-      </div>
-      <div class="panel">
-        <div class="chrome"><span class="tt mono">⌨ <span class="en">Quick capture</span><span class="ko">빠른 캡처</span></span></div>
-        <div class="cap-mock">
-          <div class="cmdline"><span class="caret">›</span><span class="mono"><span class="en">book flights !urgent #trip ~mon</span><span class="ko">항공권 예약 !급함 #여행 ~월</span></span><span class="cur" style="width:2px;height:1em;background:var(--accent);display:inline-block"></span></div>
-          <div class="arrow-down">↓</div>
-          <div class="card prio" style="margin:0"><span class="ct"><span class="en">Book flights</span><span class="ko">항공권 예약</span></span><div class="meta"><span class="pill sp">!<span class="en">urgent</span><span class="ko">급함</span></span><span class="pill"># <span class="en">trip</span><span class="ko">여행</span></span><span class="pill">~<span class="en">mon</span><span class="ko">월</span></span></div></div>
-        </div>
-      </div>
+  <figure class="shot" data-mode="day" data-daynight>
+    <div class="frame">
+      <img class="day" src="shots/02_kanban.png" width="1920" height="1080"
+           alt="달포컬 칸반 보드. 할 일, 진행 중, 기다림, 완료 네 칸에 이번 주 카드가 놓여 있다.">
+      <img class="night" src="shots/08_kanban_night.png" width="1920" height="1080" aria-hidden="true"
+           alt="같은 칸반 보드를 밤 테마로 본 화면.">
     </div>
+    <figcaption>
+      <span>이번 주 보드. 카드마다 마감, 중요도, 체크리스트가 한눈에 보입니다.</span>
+      <button class="toggle" type="button" aria-pressed="false">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="var(--moon-dark)" stroke="var(--moon-edge)"/><path d="M32 6 A26 26 0 0 1 32 58 A5.2 26 0 0 0 32 6 Z" fill="var(--moon-lit)"/></svg>
+        <span>밤 화면으로</span>
+      </button>
+    </figcaption>
+  </figure>
 
-    <!-- 02 hub -->
-    <div class="row flip">
-      <div class="copy">
-        <span class="rnum">02 · <span class="en">IT BECOMES WORK</span><span class="ko">일이 된다</span></span>
-        <h3><span class="en">Real work? Make it a card, right there.</span><span class="ko">해야 할 일이다 싶으면, 그 자리에서 카드로.</span></h3>
-        <p><span class="en">Notes, to-dos, and memos live right beside the board. Find a memo that's real work and turn it into a card — nothing to copy or move.</span><span class="ko">보드 바로 옆에 노트·할 일·메모가 같이 있습니다. 진짜 해야 할 메모가 있으면 복사·이동 없이 그 자리에서 카드로.</span></p>
-        <p><span class="en">No tabs to change, no app to open. Note today, to-do tomorrow — the kind switches whenever.</span><span class="ko">탭도 다른 앱도 열 것 없이. 노트였다 할 일이었다, 종류는 언제든 바뀝니다.</span></p>
-        <div class="tags"><span class="chip"><span class="en">note</span><span class="ko">노트</span></span><span class="chip"><span class="en">to-do</span><span class="ko">할 일</span></span><span class="chip"><span class="en">memo</span><span class="ko">메모</span></span><span class="chip a">→ <span class="en">card</span><span class="ko">카드</span></span></div>
-      </div>
-      <div class="panel">
-        <div class="chrome"><span class="tt"><span class="moon"></span><span class="en">Board + side panel</span><span class="ko">보드 + 옆 패널</span></span></div>
-        <div class="hub">
-          <div class="col" style="margin:0">
-            <h4><span><span class="en">Today</span><span class="ko">오늘</span></span><span class="n">2</span></h4>
-            <div class="card"><span class="ct"><span class="en">Fix sync retry</span><span class="ko">동기화 재시도 수정</span></span></div>
-            <div class="card glow"><span class="ct"><span class="en">Renew domain</span><span class="ko">도메인 갱신</span></span></div>
-          </div>
-          <div>
-            <div class="tabs"><span><span class="en">Notes</span><span class="ko">노트</span></span><span class="on"><span class="en">Memos</span><span class="ko">메모</span></span><span><span class="en">To-do</span><span class="ko">할 일</span></span></div>
-            <div class="memo"><span class="en">random idea about onboarding</span><span class="ko">온보딩 관련 아이디어</span></div>
-            <div class="memo hot"><span class="en">domain expires this month</span><span class="ko">도메인 이번 달 만료</span><div class="tocard">→ <span class="en">make card</span><span class="ko">카드로</span></div></div>
-            <div class="memo"><span class="en">book title candidates</span><span class="ko">책 제목 후보</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 03 finish -->
-    <div class="row">
-      <div class="copy">
-        <span class="rnum">03 · <span class="en">FINISH</span><span class="ko">끝낸다</span></span>
-        <h3><span class="en">Then push it through, hands never leaving the keys.</span><span class="ko">그다음은 손 가는 대로 밀어붙이면 됩니다.</span></h3>
-        <p><span class="en">Pick, move, done — by keyboard. <span class="key">⌘</span><span class="key">P</span> finds any project, card, or note from one box.</span><span class="ko">키보드로 고르고, 옮기고, 해치웁니다. <span class="key">⌘</span><span class="key">P</span> 한 번이면 프로젝트든 카드든 한 칸에서 다 찾고요.</span></p>
-        <p><span class="en">Prefer the mouse? Drag a shape with the right button — the shape is the command. Korean typing never eats your shortcuts.</span><span class="ko">마우스가 편하면 오른쪽 버튼을 끌어 모양을 그리면 됩니다. 그 모양이 곧 명령이죠. 한글 치는 중에도 단축키가 글자를 삼키지 않습니다.</span></p>
-        <div class="tags"><span class="chip mono">h</span><span class="chip mono">j</span><span class="chip mono">k</span><span class="chip mono">l</span><span class="chip a"><span class="en">gestures</span><span class="ko">제스처</span></span><span class="chip"><span class="en">IME-safe</span><span class="ko">한글 안전</span></span></div>
-      </div>
-      <div class="panel">
-        <div class="chrome"><span class="tt mono">⌘P <span class="en">Command</span><span class="ko">명령</span></span></div>
-        <div class="palette">
-          <div class="pal-box">
-            <div class="pal-in"><span class="caret">⌕</span><span class="mono" style="color:var(--dim)"><span class="en">move to…</span><span class="ko">이동…</span></span></div>
-            <div class="pal-row sel"><span class="ic">→</span><span><span class="en">Move card to Done</span><span class="ko">카드를 끝 칸으로</span></span><span class="kk key">⇧L</span></div>
-            <div class="pal-row"><span class="ic">◉</span><span><span class="en">Mark complete</span><span class="ko">완료 표시</span></span><span class="kk key">x</span></div>
-            <div class="pal-row"><span class="ic">✎</span><span><span class="en">Open card</span><span class="ko">카드 열기</span></span><span class="kk key">↵</span></div>
-            <div class="pal-row"><span class="ic">⌫</span><span><span class="en">Send to inbox</span><span class="ko">인박스로</span></span><span class="kk key">i</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== INTERACTIVE DEMO ===================== -->
-<section id="try" class="alt">
-  <div class="wrap">
-    <div class="section-head center">
-      <p class="eyebrow"><span class="en">Try it here</span><span class="ko">직접 해보기</span></p>
-      <h2><span class="en">Before you install — push a card around.</span><span class="ko">깔기 전에, 여기서 한번 눌러보세요.</span></h2>
-      <p><span class="en">This board is live. Works the same whether your keyboard is typing English or 한글.</span><span class="ko">아래 보드, 진짜로 움직입니다. 한/영 바꿔가며 눌러도 그대로예요.</span></p>
-    </div>
-
-    <div class="demo-shell">
-      <div class="demo-head">
-        <p><span class="hint">↓ <span class="en">Press a key.</span><span class="ko">키를 눌러보세요.</span></span> <span class="en">Clicking works too.</span><span class="ko">마우스로 눌러도 되고요.</span></p>
-        <p class="mono" style="opacity:.7"><span class="en">same in the app</span><span class="ko">앱에서도 이대로</span></p>
-      </div>
-      <div class="demo" id="demo" tabindex="0" role="application" aria-label="Keyboard demo board">
-        <div class="col"><h4><span><span class="en">Today</span><span class="ko">오늘</span></span><span class="n" data-count="0"></span></h4><ul></ul></div>
-        <div class="col"><h4><span><span class="en">Doing</span><span class="ko">하는 중</span></span><span class="n" data-count="1"></span></h4><ul></ul></div>
-        <div class="col"><h4><span><span class="en">Done</span><span class="ko">끝</span></span><span class="n" data-count="2"></span></h4><ul></ul></div>
-      </div>
-      <div class="legend">
-        <span><span class="cap key" data-key="KeyH">h</span><span class="cap key" data-key="KeyJ">j</span><span class="cap key" data-key="KeyK">k</span><span class="cap key" data-key="KeyL">l</span> <span class="en">move focus</span><span class="ko">카드 고르기</span></span>
-        <span><span class="cap key" data-key="Shift">⇧</span> + hjkl <span class="en">move card</span><span class="ko">카드 옮기기</span></span>
-        <span><span class="cap key" data-key="KeyX">x</span> <span class="en">done</span><span class="ko">완료</span></span>
-        <span><span class="cap key" data-key="Enter">↵</span> <span class="en">open</span><span class="ko">열기</span></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== COMMENTS + AI ===================== -->
-<section id="ai" class="wrap">
-  <div class="row">
-    <div class="copy">
-      <p class="eyebrow"><span class="en">Comments</span><span class="ko">댓글</span></p>
-      <h3><span class="en">Every card can talk — and your AI talks back.</span><span class="ko">카드마다 대화 — AI도 같이.</span></h3>
-      <p><span class="en">Card comments aren't just notes to yourself. Connect your AI assistant over MCP and it reads the thread, replies, and actually edits the board right there — checklists, due dates, priority.</span><span class="ko">카드 댓글은 혼잣말이 아니에요. MCP로 내 AI 어시스턴트를 연결하면 스레드를 읽고 답하고, 그 자리에서 보드를 실제로 고쳐줍니다 — 체크리스트·마감·우선순위까지.</span></p>
-      <p><span class="en">No copy-pasting into a chatbot, no lost context. The work and the conversation live in one place.</span><span class="ko">챗봇에 복붙할 일도, 맥락 잃을 일도 없이. 일과 대화가 같은 자리에 있습니다.</span></p>
-      <div class="tags"><span class="chip a"><span class="en">works today · via MCP</span><span class="ko">지금 되는 기능 · MCP</span></span><span class="chip"><span class="en">bring your own AI</span><span class="ko">내 AI 연결</span></span></div>
-    </div>
-    <div class="panel">
-      <div class="chrome"><span class="tt"><span class="moon"></span><span class="en">Card · Launch week</span><span class="ko">카드 · 출시 주간</span></span><span class="sp mono">✎ ⌫</span></div>
-      <div class="cmt">
-        <div class="cline"><span class="en">Comments</span><span class="ko">댓글</span></div>
-        <div class="msg you"><span class="av">Y</span><div><div class="who-t"><b><span class="en">You</span><span class="ko">나</span></b> · 09:12</div><div class="bub">@ai <span class="en">split this into steps and set a due date</span><span class="ko">단계별로 쪼개고 마감일도 잡아줘</span></div></div></div>
-        <div class="msg ai"><span class="av">AI</span><div><div class="who-t"><b>AI</b> · 09:12</div><div class="bub"><span class="en">Added 5 checklist items and set Friday as the due date. Want the announcement drafted in Notes?</span><span class="ko">체크리스트 5개 추가하고 마감을 금요일로 잡았어요. 공지 초안도 노트에 써둘까요?</span><div class="did">✓ <span class="en">edited card</span><span class="ko">카드 수정함</span></div></div></div></div>
-        <div class="msg you"><span class="av">Y</span><div><div class="who-t"><b><span class="en">You</span><span class="ko">나</span></b> · 09:13</div><div class="bub"><span class="en">yes — and bump the priority</span><span class="ko">응 — 우선순위도 올려줘</span></div></div></div>
-        <div class="msg ai"><span class="av">AI</span><div><div class="who-t"><b>AI</b> · 09:13</div><div class="bub"><span class="en">Done — priority is High now.</span><span class="ko">완료 — 우선순위 '높음'으로.</span><div class="did">✓ <span class="en">priority → High</span><span class="ko">우선순위 → 높음</span></div></div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== BRAIN DUMP ===================== -->
-<section id="make" class="wrap">
-  <div class="section-head center">
-    <p class="eyebrow"><span class="en">Brain dump</span><span class="ko">브레인덤프</span></p>
-    <h2><span class="en">Spill your head onto a canvas, then pull it into order.</span><span class="ko">머릿속을 캔버스에 쏟고, 끌어다 정리.</span></h2>
-    <p><span class="en">Scatter loose thoughts as fragments, cluster them, drag the keepers onto a board. And the fragments wear whatever style you like.</span><span class="ko">떠오른 생각을 조각으로 흩뿌리고, 묶고, 쓸 만한 건 보드로 끌어옵니다. 조각 모양도 원하는 대로.</span></p>
-  </div>
-  <div class="panel">
-    <div class="chrome"><span class="tt"><span class="moon"></span><span class="en">Brain dump canvas</span><span class="ko">브레인덤프 캔버스</span></span><span class="sp mono">✎ ⬚ ⌫</span></div>
-    <div class="canvas">
-      <div class="frag s-card" style="left:6%;top:14%"><span class="en">weekend trip?</span><span class="ko">주말 여행?</span></div>
-      <div class="frag s-marker" style="left:31%;top:9%"><span><span class="en">rename the app</span><span class="ko">앱 이름 바꾸기</span></span></div>
-      <div class="frag s-sticky" style="left:60%;top:12%"><span class="en">call mom back</span><span class="ko">엄마한테 전화</span></div>
-      <div class="frag s-node" style="left:12%;top:44%"><span class="en">chapter 3 outline</span><span class="ko">3장 개요</span></div>
-      <div class="frag s-frost" style="left:44%;top:41%"><span class="en">pricing experiment</span><span class="ko">가격 실험</span></div>
-      <div class="frag s-node" style="left:72%;top:47%"><span class="en">demo video</span><span class="ko">데모 영상</span></div>
-      <div class="frag s-card" style="left:20%;top:72%"><span class="en">buy new keyboard</span><span class="ko">새 키보드 사기</span></div>
-      <div class="frag s-marker" style="left:52%;top:74%"><span><span class="en">refactor sync</span><span class="ko">동기화 리팩터</span></span></div>
-      <div class="frag s-sticky" style="left:78%;top:73%"><span class="en">water the plants</span><span class="ko">화분 물 주기</span></div>
-    </div>
-  </div>
-  <div class="style-legend">
-    <span class="sl"><b>■</b> <span class="en">Card</span><span class="ko">카드</span></span>
-    <span class="sl"><b>▬</b> <span class="en">Marker</span><span class="ko">형광펜</span></span>
-    <span class="sl"><b>▢</b> <span class="en">Sticky</span><span class="ko">종이 쪽지</span></span>
-    <span class="sl"><b>⬭</b> <span class="en">Node</span><span class="ko">노드</span></span>
-    <span class="sl"><b>▨</b> <span class="en">Frosted</span><span class="ko">유리</span></span>
-  </div>
-</section>
-
-<!-- ===================== THEMES ===================== -->
-<section class="alt">
-  <div class="wrap">
-    <div class="section-head center">
-      <p class="eyebrow"><span class="en">Make it yours</span><span class="ko">내 손에 맞게</span></p>
-      <h2><span class="en">A theme changes the shape, not just the colour.</span><span class="ko">테마가 색만이 아니라 형태를 바꿉니다.</span></h2>
-      <p><span class="en">Borders, depth, accents, density, corners — each theme is a different feel. Remap every shortcut and gesture too. Build your own and share it as a file.</span><span class="ko">테두리·입체감·강조·밀도·모서리까지 테마마다 다른 결. 단축키·제스처도 원하는 대로. 직접 만들어 파일로 나눌 수도 있습니다.</span></p>
-    </div>
-    <div class="trio">
-      <div class="mini t-noc">
-        <div class="ct"><span>Nocturne</span><span class="mono"><span class="en">glow · dark</span><span class="ko">발광 · 다크</span></span></div>
-        <div class="mc"><span class="en">Design review</span><span class="ko">디자인 리뷰</span></div>
-        <div class="mc"><span class="en">Ship v0.2</span><span class="ko">v0.2 배포</span></div>
-        <div class="mc"><span class="en">Write changelog</span><span class="ko">변경 기록</span></div>
-      </div>
-      <div class="mini t-lin">
-        <div class="ct"><span>Linen</span><span class="mono"><span class="en">paper · airy</span><span class="ko">종이 · 여유</span></span></div>
-        <div class="mc"><span class="en">Morning pages</span><span class="ko">아침 글쓰기</span></div>
-        <div class="mc"><span class="en">Grocery run</span><span class="ko">장보기</span></div>
-        <div class="mc"><span class="en">Read 20 pages</span><span class="ko">20쪽 읽기</span></div>
-      </div>
-      <div class="mini t-eg">
-        <div class="ct"><span>Evergreen</span><span class="mono"><span class="en">flat · compact</span><span class="ko">평면 · 촘촘</span></span></div>
-        <div class="mc"><span class="en">Standup notes</span><span class="ko">스탠드업 노트</span></div>
-        <div class="mc"><span class="en">Fix flaky test</span><span class="ko">불안정 테스트</span></div>
-        <div class="mc"><span class="en">Review PR #42</span><span class="ko">PR #42 리뷰</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== OFFLINE ===================== -->
-<section class="wrap">
-  <div class="row">
-    <div class="copy">
-      <p class="eyebrow"><span class="en">And it's all in your hands</span><span class="ko">게다가, 전부 내 손안에</span></p>
-      <h3><span class="en">It doesn't stop when the internet does.</span><span class="ko">인터넷이 끊겨도 멈추지 않습니다.</span></h3>
-      <p><span class="en">Same on the subway, same on a plane. Your boards live on your computer, not someone's server.</span><span class="ko">지하철에서도 비행기에서도 똑같이. 보드는 남의 서버가 아니라 내 컴퓨터에 있으니까요.</span></p>
-      <p><span class="en">It backs up on every launch, and one file exports the lot. If the service ever closes, your work stays yours.</span><span class="ko">켤 때마다 백업되고, 파일 하나로 통째로 꺼내 갑니다. 서비스가 문을 닫아도 내 건 그대로 남고요.</span></p>
-      <div class="tags"><span class="chip a"><span class="en">no internet needed</span><span class="ko">인터넷 불필요</span></span><span class="chip"><span class="en">auto backup</span><span class="ko">자동 백업</span></span><span class="chip"><span class="en">export anytime</span><span class="ko">언제든 내보내기</span></span></div>
-    </div>
-    <div class="panel">
-      <div class="chrome"><span class="tt"><span class="moon"></span><span class="en">Offline</span><span class="ko">오프라인</span></span><span class="sp mono" style="color:var(--good)">⤓ <span class="en">local</span><span class="ko">로컬</span></span></div>
-      <div class="board" style="grid-template-columns:1fr 1fr">
-        <div class="col"><h4><span><span class="en">On a plane</span><span class="ko">비행기</span></span><span class="n">✈</span></h4>
-          <div class="card"><span class="ct"><span class="en">Outline talk</span><span class="ko">발표 개요</span></span></div>
-          <div class="card"><span class="ct"><span class="en">Sketch slides</span><span class="ko">슬라이드 스케치</span></span></div>
-        </div>
-        <div class="col"><h4><span><span class="en">Saved</span><span class="ko">저장됨</span></span><span class="n mono" style="color:var(--good)">✓</span></h4>
-          <div class="card done"><span class="ct"><span class="en">Backup #10</span><span class="ko">백업 #10</span></span><div class="meta"><span class="pill dn"><span class="en">local</span><span class="ko">로컬</span></span></div></div>
-          <div class="card"><span class="ct"><span class="en">Export → .dfx</span><span class="ko">내보내기 → .dfx</span></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== WHO ===================== -->
-<section class="alt">
-  <div class="wrap">
-    <div class="section-head center">
-      <p class="eyebrow"><span class="en">Who it's for</span><span class="ko">누구에게 맞나</span></p>
-      <h2><span class="en">You'll feel at home if…</span><span class="ko">이런 분이라면.</span></h2>
-    </div>
-    <ul class="who">
-      <li><span><b><span class="en">You catch ideas as they spark</span><span class="ko">번뜩인 걸 그 자리에서</span></b> <span class="en">— and hate losing a good one to a broken flow.</span><span class="ko">붙잡아야 하는 분. 좋은 생각이 흐름 끊기는 사이 날아가는 게 아까운 분.</span></span></li>
-      <li><span><span class="en">You're tired of notes here, to-dos there, cards elsewhere — </span><span class="ko">메모 따로 할 일 따로 카드 따로 노는 게 불편했던 분. </span><b>Trello/Notion <span class="en">felt scattered</span><span class="ko">가 흩어진다 싶던 분</span></b>.</span></li>
-      <li><span><b><span class="en">You move fast by keyboard</span><span class="ko">키보드로 빠르게</span></b> <span class="en">— a developer or power user with vim in your fingers.</span><span class="ko">움직이는 개발자·파워 유저. vim식 이동이 손에 붙은 분.</span></span></li>
-      <li><span><b><span class="en">You work where there's no signal</span><span class="ko">인터넷 안 되는 데서도</span></b> <span class="en">— and want your data to outlive any service.</span><span class="ko">일해야 하는 분. 서비스가 닫아도 내 건 남아야 하는 분.</span></span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ===================== INVENTORY ===================== -->
-<section class="wrap">
-  <details class="fold">
-    <summary><span class="en">Everything inside</span><span class="ko">들어 있는 것 전부</span> <small>· 15</small></summary>
-    <div class="fbody">
-      <ul class="flist">
-        <li><b><span class="en">4 views</span><span class="ko">보기 4종</span></b><span><span class="en">Kanban · list · calendar · today. Your focused card carries over.</span><span class="ko">칸반·리스트·캘린더·오늘 일정. 바꿔도 고른 카드는 그대로</span></span></li>
-        <li><b><span class="en">Card detail</span><span class="ko">카드 상세</span></b><span><span class="en">Properties · checklist · attachments · comments · tags · priority · due</span><span class="ko">속성·체크리스트·첨부·댓글·꼬리표·급한 정도·마감일</span></span></li>
-        <li><b><span class="en">Custom fields</span><span class="ko">속성 필드</span></b><span><span class="en">Defined per project. Text · select · date · number · link.</span><span class="ko">프로젝트마다 직접 정의. 텍스트·선택·날짜·숫자·링크</span></span></li>
-        <li><b><span class="en">Note panel</span><span class="ko">노트 패널</span></b><span><span class="en">Notes · to-dos · memos per project. The kind switches anytime.</span><span class="ko">프로젝트마다 노트·할 일·메모. 종류는 언제든 바뀝니다</span></span></li>
-        <li><b><span class="en">Quick capture</span><span class="ko">빠른 캡처</span></b><span><span class="en">Throw it in the inbox, sort it later.</span><span class="ko">인박스에 던져두고 나중에 제자리로</span></span></li>
-        <li><b><span class="en">One box to find + run</span><span class="ko">한 칸에서 다 찾기</span></b><span><span class="en">Search and command in one place; symbols narrow the target.</span><span class="ko">검색과 실행이 한자리에. 기호로 대상을 좁힙니다</span></span></li>
-        <li><b><span class="en">20+ templates</span><span class="ko">템플릿 20종+</span></b><span><span class="en">Columns, tags, fields, sample cards come with the board.</span><span class="ko">칸·꼬리표·필드·샘플 카드가 함께</span></span></li>
-        <li><b><span class="en">Gestures</span><span class="ko">제스처</span></b><span><span class="en">Right-drag on desktop, two fingers on mobile. Draw a shape to run.</span><span class="ko">오른쪽 드래그, 모바일은 두 손가락. 모양을 그려 실행</span></span></li>
-        <li><b><span class="en">Card links</span><span class="ko">카드 링크</span></b><span><span class="en">Every card has a link. Paste it anywhere, click back.</span><span class="ko">카드마다 고유 링크. 어디에 붙여두든 눌러서 돌아옵니다</span></span></li>
-        <li><b><span class="en">Backups</span><span class="ko">백업</span></b><span><span class="en">10 auto-backups kept + one-file export/import.</span><span class="ko">자동 백업 10개 + 파일 하나로 내보내기/가져오기</span></span></li>
-        <li><b><span class="en">Remap everything</span><span class="ko">단축키 재설정</span></b><span><span class="en">Rebind keys and gestures your way.</span><span class="ko">주요 키를 원하는 대로. 제스처도 마찬가지</span></span></li>
-        <li><b><span class="en">Move cards anywhere</span><span class="ko">카드 이동</span></b><span><span class="en">Across project, board, column — carry it whole.</span><span class="ko">프로젝트·보드·칸까지 골라 통째로</span></span></li>
+  <section class="feature" aria-labelledby="f-board">
+    <div class="text">
+      <h2 id="f-board">칸반 보드, 일을 굴리는 자리</h2>
+      <p>할 일, 진행 중, 완료 사이로 카드를 옮기며 일을 끝냅니다. 같은 카드를 표로, 캘린더로, 루틴으로 바꿔 봅니다.</p>
+      <p>매일 하는 일은 루틴 보드에서 «오늘 했어요» 한 번이면 끝이에요.</p>
+      <ul class="views" aria-label="보드 보기">
+        <li>칸반</li><li>표</li><li>캘린더</li><li>루틴</li>
       </ul>
     </div>
-  </details>
-</section>
+    <figure>
+      <img src="shots/06_card_detail.png" width="1920" height="1080" loading="lazy"
+           alt="카드 상세 화면. 설명과 체크리스트, 오른쪽에 상태, 마감일, 중요도, 라벨, 첨부 파일이 있다.">
+      <figcaption>라벨, 중요도, 마감, 체크리스트, 댓글, 첨부까지 카드 한 장에.</figcaption>
+    </figure>
+  </section>
 
-<!-- ===================== PRICING / BUY ===================== -->
-<section id="buy" class="alt">
-  <div class="wrap">
-    <div class="section-head center">
-      <p class="eyebrow"><span class="en">Join the beta</span><span class="ko">베타 참여</span></p>
-      <h2><span class="en">Free to test now. Yours for good later.</span><span class="ko">지금은 무료 테스트, 나중엔 내 것.</span></h2>
+  <section class="feature" aria-labelledby="f-canvas">
+    <div class="text">
+      <h2 id="f-canvas">아이디어 캔버스, 생각을 흩어 놓는 자리</h2>
+      <p>떠오르는 대로 블록을 던져 두고, 선으로 연결하고, 펜으로 그립니다. 할 일이다 싶은 블록은 그대로 보드로 보냅니다.</p>
+      <p>바쁠 땐 단축키 하나로 인박스에 적어 두고, 나중에 보드로 나눠도 돼요.</p>
     </div>
+    <figure>
+      <img src="shots/01_canvas.png" width="1920" height="1080" loading="lazy"
+           alt="아이디어 캔버스. 가운데 '10월에 하고 싶은 것'에서 일곱 갈래로 생각이 뻗어 있다.">
+      <figcaption>가운데 생각 하나에서 가지를 뻗고, 옆에는 묶어 둔 블록들.</figcaption>
+    </figure>
+  </section>
 
-    <div class="price-card">
-      <span class="once"><span class="en">Beta · free right now</span><span class="ko">베타 · 지금은 무료</span></span>
-      <p class="amt"><span class="en">Free</span><span class="ko">무료</span> <small><span class="en">· ₩12,000 one-time at launch</span><span class="ko">· 정식 출시 시 일회성 ₩12,000</span></small></p>
+  <section class="feature" aria-labelledby="f-notes">
+    <div class="text">
+      <h2 id="f-notes">노트와 집중 모드</h2>
+      <p>프로젝트마다 노트, 할 일, 메모를 허브 하나에 모읍니다. 카드와 노트를 서로 링크하고, 마크다운으로 쓰고, vim 키로도 움직입니다.</p>
+      <p>집중 모드에서는 카드와 노트를 한 장씩 크게 보여 줍니다. 읽다가 그 자리에서 고치면 됩니다.</p>
+    </div>
+    <figure>
+      <img src="shots/05_zen.png" width="1920" height="1080" loading="lazy"
+           alt="집중 모드 화면. 회의 카드 한 장이 화면 가운데 크게 펼쳐져 있다.">
+      <figcaption>집중 모드로 읽기. h, l 로 넘기고 e 로 고칩니다.</figcaption>
+    </figure>
+  </section>
+
+  <section class="feature" aria-labelledby="f-ai">
+    <div class="text">
+      <h2 id="f-ai">AI는 내가 켤 때만</h2>
+      <p>Claude Desktop, Claude Code, Cursor 같은 AI 앱이 내 카드와 노트를 읽고 쓰게 할 수 있습니다. 앱 안에서 바로 대화할 수도 있고요. 내 PC 모델을 쓰거나, 내 API 키로 AI 회사에 직접 연결합니다.</p>
+      <p>내 API 키를 쓰면 대화 글과 AI가 읽은 카드, 노트가 내가 고른 AI 회사로 나갑니다. 달스튜디오 서버는 지나지 않고, 키는 이 기기의 암호화 저장소에 보관합니다. 요금은 그 회사에 따로 냅니다.</p>
+      <p>연결 가이드가 한 단계씩 안내하고, 끄면 그 자리에서 끊깁니다.</p>
+      <p>«의미 검색»을 켜면 처음 한 번 모델(약 558MB)을 다운로드합니다. 그 뒤로는 단어가 달라도 뜻이 가까운 글을 기기 안에서 찾아 줍니다.</p>
+    </div>
+    <figure>
+      <img src="shots/07_ai_guide.png" width="1920" height="1080" loading="lazy"
+           alt="설정의 AI 연결 가이드. 달포컬 안에서 AI와 대화하기, 쓰던 AI 앱에서 달포컬 쓰기 두 가지를 고른다.">
+      <figcaption>AI 연결 가이드. 어떻게 쓸지 고르면 하나씩 맞춰 드립니다.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="f-data">
+    <h2 id="f-data">서버도, 로그인도 없이</h2>
+    <div class="feature" style="margin-top:1.25rem">
+      <div class="text">
+        <p>설치하자마자 계정 없이 씁니다. 보드와 카드와 노트는 전부 내 PC에 남습니다.</p>
+        <p>내 기기 하나를 서버로 켜면 다른 기기와 직접 연결해 동기화합니다. 데이터는 내 기기끼리만 주고받고, 달스튜디오 서버는 거치지 않습니다.</p>
+      </div>
+      <dl class="included">
+        <dt>보드</dt><dd>칸반, 표, 캘린더, 루틴</dd>
+        <dt>카드</dt><dd>체크리스트, 댓글, 첨부, 링크, 라벨, 중요도, 마감, 반복 일정</dd>
+        <dt>생각</dt><dd>아이디어 캔버스, 인박스</dd>
+        <dt>노트</dt><dd>프로젝트 노트, 할 일, 메모, 링크와 백링크, 마크다운, 집중 모드</dd>
+        <dt>이동</dt><dd>검색, 명령 팔레트, F6 구역 넘기기, 의미 검색(모델을 다운로드한 뒤)</dd>
+        <dt>입력</dt><dd>키보드만으로 전부, 단축키 바꾸기, vim 모드, 한글 입력기 대응</dd>
+        <dt>AI</dt><dd>AI 앱 연결, 앱 안 AI 대화(내 PC 모델, 내 API 키), 연결 가이드</dd>
+        <dt>데이터</dt><dd>내 PC에 저장, 내 기기끼리 동기화, 백업과 자동 백업, 노트 .md 내보내기와 가져오기</dd>
+        <dt>창</dt><dd>트레이, 로그인 때 자동 시작, 창 여러 개</dd>
+        <dt>꾸미기</dt><dd>테마, 내 테마 만들기, 아이콘 모양(선, 색, 이모지)</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-privacy">
+    <h2 id="f-privacy">개인정보</h2>
+    <div class="privacy-box">
+      <p>메모와 카드는 내 기기에 있습니다. 달포컬에는 운영자의 서버가 없고, 운영자는 내 데이터를 받지 않습니다.</p>
       <ul>
-        <li><span class="en">Test everything free while the beta runs</span><span class="ko">베타 기간엔 전부 무료로 사용</span></li>
-        <li><span class="en">One-time at launch — no subscription to use the app</span><span class="ko">정식판은 일회성 — 쓰는 데 구독 없음</span></li>
-        <li><span class="en">Local-first: your data stays on your device</span><span class="ko">로컬 우선: 데이터는 내 기기에</span></li>
+        <li>회원가입이나 로그인이 없습니다.</li>
+        <li>광고, 사용 행태 분석과 추적, 크래시 보고 전송이 없습니다.</li>
+        <li>AI 연결, 의미 검색, 동기화처럼 내가 켠 기능만 기기 밖으로 데이터를 보냅니다.</li>
       </ul>
-      <div class="hero-cta" style="margin-top:0">
-        <a class="btn" href="https://play.google.com/apps/testing/com.dalfocal.dalfocal" data-cta="beta"><span class="en">Become a tester on Google Play</span><span class="ko">Google Play 테스터로 참여</span></a>
-      </div>
-      <p class="price-note" style="margin-top:1rem"><span class="en">Opt in first — then the store page opens for you.</span><span class="ko">먼저 참여(옵트인)해야 스토어 페이지가 열립니다.</span> <a href="https://play.google.com/store/apps/details?id=com.dalfocal.dalfocal" style="color:var(--accent-2);text-decoration:underline"><span class="en">Store page</span><span class="ko">스토어 페이지</span></a></p>
+      <a href="privacy.html">개인정보 처리방침 전문 보기</a>
     </div>
-
-    <div class="platforms">
-      <div class="plat">
-        <p class="st"><span class="en">Available now</span><span class="ko">지금 가능</span></p>
-        <h3>Windows</h3>
-        <p><span class="en">Unzip and run — nothing to install. Unsigned for now, so Windows shows a blue warning: click More info → Run.</span><span class="ko">압축 풀고 실행하면 끝. 아직 서명 전이라 파란 경고창이 뜨는데 추가 정보 → 실행을 누르면 됩니다.</span></p>
-        <a class="btn small ghost" href="#" data-cta="windows"><span class="en">Download Windows build</span><span class="ko">Windows 빌드 받기</span></a>
-      </div>
-      <div class="plat">
-        <p class="st"><span class="en">Beta on Google Play</span><span class="ko">Play 베타 진행 중</span></p>
-        <h3>Android</h3>
-        <p><span class="en">Opt in and install straight from Play. Cross-device sync is still being finished, so it's off for now — one device at a time.</span><span class="ko">옵트인하면 Play에서 바로 설치됩니다. 기기 간 동기화는 마무리 중이라 지금은 꺼둠 — 한 기기 안에서 동작.</span></p>
-        <a class="btn small" href="https://play.google.com/apps/testing/com.dalfocal.dalfocal" data-cta="beta"><span class="en">Join the beta</span><span class="ko">베타 참여하기</span></a>
-      </div>
-    </div>
-
-    <div class="ea-note">
-      <b><span class="en">Honest beta note.</span><span class="ko">솔직한 베타 안내.</span></b>
-      <span class="en"> Dalfocal is early — the Windows build isn't signed yet, and device-to-device sync isn't on. What's here works and is local-first, so your data is always exportable to a file. Testing is free; when it launches it's a one-time purchase, never a subscription.</span>
-      <span class="ko"> Dalfocal은 초기 단계입니다 — Windows 빌드는 아직 서명 전, 기기 간 동기화는 미적용. 지금 있는 건 로컬 우선으로 잘 돌아가고, 데이터는 언제든 파일로 내보낼 수 있습니다. 테스트는 무료, 정식 출시는 일회성 구매 — 구독은 없습니다.</span>
-      <span class="en"> Hit a snag? </span><span class="ko"> 막히는 게 있으면 </span><a href="contact.html" style="color:var(--accent-2);text-decoration:underline"><span class="en">tell us here</span><span class="ko">여기로 알려주세요</span></a>.
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FAQ ===================== -->
-<section class="wrap faq">
-  <div class="section-head"><p class="eyebrow"><span class="en">Questions</span><span class="ko">질문</span></p></div>
-
-  <details open>
-    <summary><span class="en">How is this different from Notion / Trello?</span><span class="ko">노션·트렐로와 뭐가 다른가요?</span></summary>
-    <p><span class="en">Three things: it opens instantly with no wait, it works with no internet at all, and it holds notes, to-dos, and memos in the same project — not just a board. No sign-up, and your boards live on your computer.</span><span class="ko">세 가지가 다릅니다. 켜면 기다림 없이 바로 뜨고, 인터넷이 없어도 그냥 되고, 보드만이 아니라 노트·할 일·메모가 같은 프로젝트에 다 있습니다. 가입 화면도 없고, 보드는 내 컴퓨터에 있고요.</span></p>
-  </details>
-  <details>
-    <summary><span class="en">Do I have to use the keyboard?</span><span class="ko">키보드를 안 쓰면 못 쓰나요?</span></summary>
-    <p><span class="en">No. Everything works by touch and mouse — drag cards, tap to open. The keyboard is the fast path, not the only one. On mobile there are two-finger gestures too.</span><span class="ko">아니요. 모든 기능이 손가락·마우스로도 됩니다. 카드는 끌어다 놓고 목록은 눌러서 엽니다. 키보드는 더 빨라지는 길이지 유일한 길은 아닙니다. 모바일엔 두 손가락 제스처도 있고요.</span></p>
-  </details>
-  <details>
-    <summary><span class="en">Can I use it on phone + PC together?</span><span class="ko">폰+PC에서 같이 쓸 수 있나요?</span></summary>
-    <p><span class="en">That's being built. Device-to-device sync needs its privacy piece finished, so it's off for this release. Multiple windows on one computer already work — all showing the same data.</span><span class="ko">그렇게 만들고 있습니다. 기기를 잇는 건 준비가 덜 끝나 이번엔 꺼뒀습니다. 한 컴퓨터에서 창 여러 개 띄우는 건 지금도 됩니다. 다 같은 내용을 봐요.</span></p>
-  </details>
-  <details>
-    <summary><span class="en">Do I need an account?</span><span class="ko">계정을 만들어야 하나요?</span></summary>
-    <p><span class="en">No. There isn't even a login screen. Install and a board opens.</span><span class="ko">아니요. 로그인 화면조차 없습니다. 깔면 바로 보드가 열립니다.</span></p>
-  </details>
-  <details>
-    <summary><span class="en">What if the app or service goes away?</span><span class="ko">앱·서비스가 사라지면 제 데이터는요?</span></summary>
-    <p><span class="en">Your data is on your device and exports to a single file anytime. It can't be held hostage — it's yours to walk away with.</span><span class="ko">데이터는 내 기기에 있고 언제든 파일 하나로 꺼내 갈 수 있습니다. 인질로 잡힐 일이 없어요 — 내 것이니까요.</span></p>
-  </details>
-</section>
-
+  </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p class="brand" style="font-size:1rem"><span class="moon" aria-hidden="true"></span>Dalfocal</p>
-    <nav>
-      <a href="#flow"><span class="en">How it works</span><span class="ko">작동 방식</span></a>
-      <a href="#buy"><span class="en">Join beta</span><span class="ko">베타 참여</span></a>
-      <a href="guide.html"><span class="en">Guide</span><span class="ko">사용법</span></a>
-      <a href="contact.html"><span class="en">Contact</span><span class="ko">문의</span></a>
-      <a href="privacy.html"><span class="en">Privacy</span><span class="ko">개인정보</span></a>
-    </nav>
-    <p class="mono" style="opacity:.7"><span class="en">Local-first · your data exports anytime</span><span class="ko">로컬 우선 · 데이터는 언제든 내보내기</span></p>
+<footer id="contact" class="foot wrap">
+  <div>
+    <p class="who">달스튜디오 (Dalstudio)</p>
+    <p>문의 <a href="mailto:support@dalfocal.com">support@dalfocal.com</a></p>
+    <p><a href="privacy.html">개인정보 처리방침</a></p>
+    <p><a href="guide.html">달포컬 1 문서</a></p>
+  </div>
+  <div class="biz">
+    <p>© 2026 Dalstudio</p>
   </div>
 </footer>
 
 <script>
-(function(){
-  "use strict";
-  var root=document.documentElement;
-
-  /* language: detect, toggle, persist within session */
-  function setLang(l){
-    root.setAttribute("data-lang",l);
-    document.getElementById("lang").textContent = (l==="ko"?"EN":"KO");
-  }
-  var initial = (navigator.language||"en").toLowerCase().indexOf("ko")===0 ? "ko":"en";
-  setLang(initial);
-  document.getElementById("lang").addEventListener("click",function(){
-    setLang(root.getAttribute("data-lang")==="ko"?"en":"ko");
-  });
-
-  /* theme toggle over OS preference */
-  document.getElementById("theme").addEventListener("click",function(){
-    var dark=window.matchMedia("(prefers-color-scheme: dark)").matches;
-    var cur=root.getAttribute("data-theme")||(dark?"dark":"light");
-    root.setAttribute("data-theme",cur==="dark"?"light":"dark");
-  });
-
-  /* ---- live demo board ---- */
-  var columns=[
-    [ {t:{en:"Polish landing copy",ko:"랜딩 문구 다듬기"},d:false},
-      {t:{en:"Draft beta email",ko:"베타 안내 메일 초안"},d:false},
-      {t:{en:"Redraw the icon",ko:"아이콘 다시 그리기"},d:false} ],
-    [ {t:{en:"Move a card — ⇧ + h/l",ko:"카드 옮기기 — ⇧ + h/l"},d:false},
-      {t:{en:"Mark done — x",ko:"완료 표시 — x"},d:false} ],
-    [ {t:{en:"Wire up the demo",ko:"키보드 데모 붙이기"},d:true} ]
-  ];
-  var focus={col:0,row:0};
-  var demo=document.getElementById("demo");
-  var lists=[].slice.call(demo.querySelectorAll(".col ul"));
-  var counts=[].slice.call(demo.querySelectorAll("[data-count]"));
-  function clamp(n,lo,hi){return Math.max(lo,Math.min(hi,n));}
-  function lang(){return root.getAttribute("data-lang")||"en";}
-
-  function render(bump){
-    lists.forEach(function(ul,ci){
-      ul.textContent="";
-      columns[ci].forEach(function(card,ri){
-        var li=document.createElement("li");
-        li.className="card";li.dataset.done=String(card.d);
-        li.dataset.focused=String(ci===focus.col&&ri===focus.row);
-        var tick=document.createElement("span");tick.className="tick";tick.textContent=card.d?"✓":"·";tick.setAttribute("aria-hidden","true");
-        var text=document.createElement("span");text.className="card-text";text.textContent=card.t[lang()]||card.t.en;
-        li.append(tick,text);
-        li.addEventListener("click",function(){focus={col:ci,row:ri};render();});
-        ul.appendChild(li);
-      });
-      counts[ci].textContent=columns[ci].length?String(columns[ci].length):"";
+  // 낮과 밤 스크린샷 바꾸기. 스크립트가 없으면 낮 화면만 보인다.
+  (function () {
+    var fig = document.querySelector('[data-daynight]');
+    if (!fig) return;
+    var btn = fig.querySelector('.toggle');
+    var label = btn.querySelector('span');
+    var day = fig.querySelector('img.day');
+    var night = fig.querySelector('img.night');
+    btn.addEventListener('click', function () {
+      var toNight = fig.getAttribute('data-mode') !== 'night';
+      fig.setAttribute('data-mode', toNight ? 'night' : 'day');
+      btn.setAttribute('aria-pressed', String(toNight));
+      label.textContent = toNight ? '낮 화면으로' : '밤 화면으로';
+      day.setAttribute('aria-hidden', String(toNight));
+      night.setAttribute('aria-hidden', String(!toNight));
     });
-    if(bump){var el=lists[focus.col].children[focus.row];if(el){el.classList.add("bump");setTimeout(function(){el.classList.remove("bump");},140);}}
-  }
-  function norm(){focus.col=clamp(focus.col,0,columns.length-1);var len=columns[focus.col].length;focus.row=len?clamp(focus.row,0,len-1):0;}
-  function moveFocus(dc,dr){if(dc){var n=clamp(focus.col+dc,0,columns.length-1);if(columns[n].length===0)return;focus.col=n;}if(dr)focus.row+=dr;norm();render();}
-  function moveCard(dc,dr){var from=columns[focus.col];if(!from.length)return;
-    if(dc){var t=focus.col+dc;if(t<0||t>=columns.length)return;var c=from.splice(focus.row,1)[0];var r=clamp(focus.row,0,columns[t].length);columns[t].splice(r,0,c);focus={col:t,row:r};}
-    else if(dr){var to=focus.row+dr;if(to<0||to>=from.length)return;var m=from.splice(focus.row,1)[0];from.splice(to,0,m);focus.row=to;}
-    norm();render(true);}
-  function toggleDone(){var c=columns[focus.col][focus.row];if(!c)return;c.d=!c.d;render(true);}
-
-  var MOVES={KeyH:[-1,0],ArrowLeft:[-1,0],KeyL:[1,0],ArrowRight:[1,0],KeyK:[0,-1],ArrowUp:[0,-1],KeyJ:[0,1],ArrowDown:[0,1]};
-  function lightCap(code,shift){
-    var caps=[];
-    if(shift)caps=caps.concat([].slice.call(document.querySelectorAll('.cap[data-key="Shift"]')));
-    caps=caps.concat([].slice.call(document.querySelectorAll('.cap[data-key="'+code+'"]')));
-    caps.forEach(function(c){c.classList.add("lit");setTimeout(function(){c.classList.remove("lit");},130);});
-  }
-  function inView(el){var r=el.getBoundingClientRect();return r.bottom>60&&r.top<window.innerHeight-40;}
-  window.addEventListener("keydown",function(e){
-    if(e.ctrlKey||e.altKey||e.metaKey)return;
-    var tag=(e.target.tagName||"").toLowerCase();
-    if(tag==="input"||tag==="textarea"||e.target.isContentEditable)return;
-    if(!inView(demo)&&document.activeElement!==demo)return;
-    var code=e.code,move=MOVES[code];
-    if(move){e.preventDefault();lightCap(code,e.shiftKey);e.shiftKey?moveCard(move[0],move[1]):moveFocus(move[0],move[1]);return;}
-    if(code==="KeyX"){e.preventDefault();lightCap(code,false);toggleDone();return;}
-    if(code==="Enter"||code==="NumpadEnter"){if(document.activeElement!==demo)return;e.preventDefault();lightCap("Enter",false);render(true);}
-  });
-
-  /* re-render demo text when language flips */
-  document.getElementById("lang").addEventListener("click",function(){render();});
-  render();
-})();
+  })();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,262 @@
+/* 달스튜디오 사이트 시안. 웹 글꼴과 외부 요청이 없다. 개인정보 방침의 "추적 없음" 과 맞추려고. */
+
+:root {
+  --sky: #E9EDF3;        /* 바탕. 새벽 하늘 */
+  --paper: #F7F8FB;      /* 떠 있는 면 */
+  --ink: #1D2536;        /* 글자. 남색 먹 */
+  --ink-soft: #4B5568;
+  --muted: #667085;
+  --line: #CDD3DE;
+  --accent: #3B4A8C;     /* 링크. 앱의 남보라 강조와 같은 계열 */
+  --moon-lit: #E2C26A;   /* 달의 밝은 쪽 */
+  --moon-dark: #C6CDDA;  /* 달의 그늘 */
+  --moon-edge: #8F9AAE;
+
+  --sans: system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+
+  --s-1: 0.875rem;
+  --s0: 1.0625rem;
+  --s1: 1.3rem;
+  --s2: 1.75rem;
+  --s3: clamp(2.25rem, 1.5rem + 3.4vw, 3.75rem);
+
+  --wrap: 68rem;
+  --measure: 34em;
+  --gutter: clamp(16px, 4vw, 48px);
+  --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sky: #131925;
+    --paper: #1A2131;
+    --ink: #E6E9F0;
+    --ink-soft: #AEB6C6;
+    --muted: #8A93A6;
+    --line: #2B3446;
+    --accent: #A9B6F2;
+    --moon-lit: #F1D68C;
+    --moon-dark: #262E40;
+    --moon-edge: #3E485E;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--sky); color: var(--ink); -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--sky);
+  font: 400 var(--s0)/1.75 var(--sans);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: var(--accent); text-underline-offset: 0.2em; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.skip {
+  position: absolute; left: var(--gutter); top: -4rem;
+  background: var(--ink); color: var(--paper); padding: 0.5rem 0.9rem; border-radius: 8px;
+}
+.skip:focus { top: 0.75rem; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- 머리 ---------- */
+
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-top: 1.25rem; padding-bottom: 1.25rem;
+}
+.mark {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: -0.01em;
+}
+.mark svg { width: 22px; height: 22px; }
+.top nav { display: flex; gap: 1.25rem; font-size: var(--s-1); }
+.top nav a { color: var(--ink-soft); text-decoration: none; }
+.top nav a:hover, .top nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
+
+/* ---------- 공통 글 ---------- */
+
+h1, h2, h3 { margin: 0; line-height: 1.25; letter-spacing: -0.02em; font-weight: 700; }
+h1 { font-size: var(--s3); line-height: 1.15; letter-spacing: -0.035em; }
+h2 { font-size: var(--s2); }
+h3 { font-size: var(--s1); }
+p { margin: 0; }
+
+.lede { font-size: var(--s1); line-height: 1.6; color: var(--ink-soft); max-width: 26em; }
+.small { font-size: var(--s-1); color: var(--muted); }
+
+section { padding-top: clamp(3.5rem, 8vw, 6rem); }
+
+/* ---------- 홈: 달의 위상 ---------- */
+
+.hero { padding-top: clamp(2.5rem, 7vw, 5rem); }
+.hero .lede { margin-top: 1.25rem; }
+
+.horizon {
+  list-style: none; margin: clamp(3rem, 7vw, 4.5rem) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.horizon a {
+  display: grid; gap: 0.2rem; color: var(--ink); text-decoration: none; padding-right: 0.75rem;
+}
+.horizon .sky {
+  padding-bottom: 1.1rem; margin-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+.moon { width: clamp(40px, 7vw, 72px); height: auto; overflow: visible; }
+.moon .shade { fill: var(--moon-dark); stroke: var(--moon-edge); stroke-width: 1; }
+.moon .lit { fill: var(--moon-lit); }
+.horizon .name { font-weight: 700; }
+.horizon .when { font-size: var(--s-1); color: var(--muted); line-height: 1.45; }
+.horizon a:hover .name { text-decoration: underline; }
+.legend { margin-top: 1.25rem; }
+
+/* ---------- 홈: 앱 목록 ---------- */
+
+.apps { list-style: none; margin: 1.75rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.app {
+  display: grid; grid-template-columns: 10rem minmax(0, 1fr) 11rem; gap: 0.4rem 2.5rem;
+  padding: 1.6rem 0; border-bottom: 1px solid var(--line);
+}
+.app h3 { font-size: var(--s1); }
+.app h3 span { display: block; font-size: var(--s-1); font-weight: 400; color: var(--muted); letter-spacing: 0; }
+.app p { max-width: var(--measure); }
+.app .meta { font-size: var(--s-1); color: var(--ink-soft); line-height: 1.6; }
+.app .meta strong { display: block; color: var(--ink); font-weight: 600; }
+.app .more { display: inline-block; margin-top: 0.5rem; font-weight: 600; }
+
+/* ---------- 바닥 ---------- */
+
+.foot {
+  margin-top: clamp(4rem, 10vw, 7rem); padding-top: 2rem; padding-bottom: 3rem;
+  border-top: 1px solid var(--line); font-size: var(--s-1); color: var(--ink-soft);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem 3rem;
+}
+.foot .who { color: var(--ink); font-weight: 700; }
+.foot p + p { margin-top: 0.35rem; }
+.biz { color: var(--muted); }
+.placeholder {
+  background: color-mix(in srgb, var(--moon-lit) 28%, transparent);
+  border-radius: 4px; padding: 0 0.3em; color: var(--ink);
+}
+
+/* ---------- 달포컬 페이지 ---------- */
+
+.product-hero { padding-top: clamp(2rem, 6vw, 4rem); display: grid; gap: 1.25rem; }
+.product-name {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-weight: 700; color: var(--ink-soft);
+}
+.product-name svg { width: 26px; height: 26px; }
+.product-hero h1 { max-width: 12em; }
+
+.get { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; }
+.btn {
+  display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0.05rem;
+  padding: 0.75rem 1.15rem; border-radius: 10px; border: 1px solid var(--ink);
+  background: transparent; color: var(--ink); font: inherit; font-weight: 700; text-decoration: none;
+}
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn small { font-size: 0.78rem; font-weight: 400; opacity: 0.8; }
+.btn[aria-disabled="true"] { cursor: not-allowed; }
+
+.shot {
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+}
+.shot .frame {
+  display: grid; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--line); background: var(--paper);
+  box-shadow: 0 30px 60px -40px rgb(20 26 40 / 0.45);
+}
+.shot .frame img { grid-area: 1 / 1; transition: opacity 0.35s ease; }
+.shot[data-mode="day"] .night,
+.shot[data-mode="night"] .day { opacity: 0; }
+.shot figcaption {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
+  margin-top: 0.9rem; font-size: var(--s-1); color: var(--ink-soft);
+}
+.toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font: inherit; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.35rem 0.85rem 0.35rem 0.45rem; cursor: pointer;
+}
+.toggle svg { width: 20px; height: 20px; }
+
+.feature {
+  display: grid; grid-template-columns: minmax(0, 21em) minmax(0, 1fr); gap: 2rem clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+.feature .text { display: grid; gap: 1rem; }
+.feature .text p { color: var(--ink-soft); }
+.feature figure { margin: 0; }
+.feature figure img { border-radius: var(--radius); border: 1px solid var(--line); }
+.feature figcaption { margin-top: 0.6rem; font-size: var(--s-1); color: var(--muted); }
+
+.views { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; padding: 0; list-style: none; }
+.views li { font-size: var(--s-1); padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
+
+.included { margin: 1.5rem 0 0; display: grid; grid-template-columns: 6rem minmax(0, 1fr); border-top: 1px solid var(--line); }
+.included dt, .included dd { margin: 0; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+.included dt { font-weight: 700; }
+.included dd { color: var(--ink-soft); }
+
+.privacy-box {
+  margin-top: 1.5rem; padding: 1.5rem; border-radius: var(--radius);
+  background: var(--paper); border: 1px solid var(--line); max-width: 40em;
+}
+.privacy-box ul { margin: 0.75rem 0 1rem; padding-left: 1.2rem; }
+.privacy-box li + li { margin-top: 0.3rem; }
+
+/* ---------- 문서 (개인정보 처리방침) ---------- */
+
+.doc { max-width: 44em; padding-top: clamp(2rem, 6vw, 4rem); }
+.doc + .doc { margin-top: clamp(3rem, 8vw, 5rem); border-top: 1px solid var(--line); }
+.doc h1 { font-size: var(--s2); }
+.doc .lede { margin-top: 1rem; max-width: none; }
+.doc .dates { margin-top: 1rem; }
+.doc h2 { font-size: var(--s1); margin-top: 2.5rem; }
+.doc p, .doc ul { margin-top: 0.75rem; }
+.doc ul { padding-left: 1.2rem; }
+.doc li + li { margin-top: 0.35rem; }
+.doc .table-wrap { overflow-x: auto; margin-top: 1rem; }
+.doc table { border-collapse: collapse; width: 100%; font-size: var(--s-1); min-width: 32em; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem 0.6rem 0; border-bottom: 1px solid var(--line); }
+.doc th { font-weight: 700; }
+.doc th:first-child, .doc td:first-child { min-width: 7.5em; }
+.doc th:nth-child(2), .doc td:nth-child(2) { min-width: 10em; }
+.doc h2.doc-title { font-size: var(--s2); margin-top: 0; }
+.doc h3 { font-size: var(--s1); margin-top: 2.5rem; }
+.doc code { font-family: ui-monospace, Consolas, "D2Coding", monospace; font-size: 0.9em; }
+.doc pre {
+  margin: 0.75rem 0 0; padding: 0.9rem 1rem; overflow-x: auto;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+  font-size: var(--s-1); line-height: 1.6;
+}
+.doc pre code { font-size: inherit; white-space: pre; overflow-wrap: normal; }
+.doc .note {
+  padding: 0.6rem 0.9rem; border-left: 3px solid var(--moon-lit); border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--moon-lit) 12%, transparent);
+}
+
+/* ---------- 좁은 화면 ---------- */
+
+@media (max-width: 760px) {
+  .app { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .feature { grid-template-columns: minmax(0, 1fr); }
+  .foot { grid-template-columns: minmax(0, 1fr); }
+  .horizon .when { display: none; }
+  .horizon a { padding-right: 0.4rem; }
+  .horizon .name { font-size: var(--s-1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shot .frame img { transition: none; }
+}
